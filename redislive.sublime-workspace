@@ -1,0 +1,896 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tim",
+				"timePeriodsKey"
+			],
+			[
+				"memo",
+				"memory"
+			],
+			[
+				"key",
+				"keyname"
+			],
+			[
+				"to",
+				"TopKeysController  (class)"
+			],
+			[
+				"re",
+				"render"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"en",
+				"enableTimer"
+			],
+			[
+				"up",
+				"UpdateModel"
+			],
+			[
+				"u",
+				"UpdateModel"
+			],
+			[
+				"ti",
+				"timedelta  (class)"
+			],
+			[
+				"redis",
+				"redisClient"
+			],
+			[
+				"mi",
+				"minutes"
+			],
+			[
+				"da",
+				"days  (variable)"
+			],
+			[
+				"min",
+				"minute"
+			],
+			[
+				"gro",
+				"groupBy"
+			],
+			[
+				"memory",
+				"memoryData"
+			],
+			[
+				"get",
+				"get_argument"
+			],
+			[
+				"red",
+				"redisInfo"
+			],
+			[
+				"ser",
+				"serverList"
+			],
+			[
+				"st",
+				"stop  (function)"
+			],
+			[
+				"mon",
+				"monitor"
+			],
+			[
+				"sock",
+				"sockets"
+			],
+			[
+				"redi",
+				"redisServer"
+			],
+			[
+				"cur",
+				"current_current"
+			],
+			[
+				"cu",
+				"current_max"
+			],
+			[
+				"curr",
+				"current_item"
+			],
+			[
+				"datetime",
+				"datetime"
+			],
+			[
+				"char",
+				"chartData"
+			],
+			[
+				"add",
+				"addRows"
+			],
+			[
+				"time",
+				"timeofday"
+			],
+			[
+				"data",
+				"dataTable"
+			],
+			[
+				"from",
+				"fromDate"
+			],
+			[
+				"sa",
+				"SaveMonitorCommand  (function)"
+			],
+			[
+				"tr",
+				"try	Try/Except"
+			],
+			[
+				"date",
+				"datetime  (class)"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"mod",
+				"memory-widget-template"
+			],
+			[
+				"mode",
+				"memory-widget-placeholder"
+			],
+			[
+				"v",
+				"View"
+			],
+			[
+				"i",
+				"initialize"
+			],
+			[
+				"m",
+				"Model"
+			],
+			[
+				"inf",
+				"InfoHandler"
+			],
+			[
+				"r",
+				"redisHost"
+			],
+			[
+				"rand",
+				"randomnumber"
+			],
+			[
+				"info",
+				"info-widget-template"
+			],
+			[
+				"ta",
+				"table-bordered"
+			],
+			[
+				"table",
+				"table-condensed"
+			],
+			[
+				"view",
+				"viewHolder"
+			],
+			[
+				"fn",
+				"function"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/main.py",
+			"settings":
+			{
+				"buffer_size": 1279,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/dataprovider/redisprovider.py",
+			"settings":
+			{
+				"buffer_size": 6999,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 94.0,
+		"selected_items":
+		[
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"project",
+				"Project: Close"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"forma",
+				"Format: Javascript"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"form",
+				"Format: Javascript"
+			],
+			[
+				"install page",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"ind",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"snip",
+				"Snippet: Function"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"for",
+				"Format: Javascript"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"Snippet: ",
+				"Snippet: <?php echo $this->… ?>"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
+				"Fetch",
+				"Fetch"
+			],
+			[
+				"fetch",
+				"Fetch: Manage remote files"
+			],
+			[
+				"Fetc",
+				"Fetch: Manage remote files"
+			],
+			[
+				"Fet",
+				"Fetch"
+			],
+			[
+				"fet",
+				"Fetch"
+			],
+			[
+				"fetc",
+				"Fetch: Manage remote files"
+			],
+			[
+				"jsh",
+				"JSHint"
+			],
+			[
+				"plug",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"prefer",
+				"Preferences: Settings - Default"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Tidy HTML"
+			]
+		],
+		"width": 561.0
+	},
+	"console":
+	{
+		"height": 227.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_monitor.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/app.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/BaseController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/config.ini",
+		"/Users/nk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_fill_data.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_fill_data2.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/main.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/dataprovider/sqliteprovider.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/dataprovider/sqlite.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/dataprovider/redis.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/top-commands-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/top-keys-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/KeysController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/CommandsController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/readwrite-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/MemoryController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/TopCommandsController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/index.html",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/keyspace-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/base-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/top-keys-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/TopKeysController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/memory-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/commands-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/info-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/issues_faced.txt",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/keys-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/ReadWriteController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/InfoController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/KeySpaceController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/top-commands-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/commands-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/memory-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/commands-widget-view.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/info-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/serverlist-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/ServerListController.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/serverlist-view.js",
+		"/Library/Python/2.7/site-packages/tornado/__init__.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/__init__.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/readwrite-widget-model.js",
+		"/Library/Python/2.7/site-packages/tornado/iostream.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_info.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_base.py",
+		"/Users/nk/Dropbox/Dropquest 2012/38645.txt",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/main.py",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/www/index.html",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/redis_monitor.py",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/redis_info.py",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/redis_fill_data.py",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/issues_faced.txt",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/api/controller/BaseController.py",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/www/js/views/memory-widget-view.js",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/www/js/views/base-widget-view.js",
+		"/Users/nitin/Dropbox/RedisLive/RedisLive/src/www/js/views/keyspace-widget-view.js",
+		"/Users/nk/Desktop/Ancestory Questions.txt",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/util/RDP.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/RDP.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/util/__init__.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/rdp.py",
+		"/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/dateutil/parser.py",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/less/widget.less",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/memory-widget-view_fixed.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/memory-widget-view leak.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/views/keyspace-widget-view_leak.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/keyspace-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/models/keys-widget-model.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/less/type.less",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/less/wells.less",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/less/variables.less",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/less/tables.less",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/redislive.sublime-project",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/js/bootstrap-typeahead.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/js/bootstrap-tab.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/js/bootstrap-button.js",
+		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/js/bootstrap-alert.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/main.py",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/index.html",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/js/views/memory-widget-view.js",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/controller/MemorySparklineHandler.py",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/js/app.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/js/models/info-widget-model.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/js/models/memory-widget-model.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/js/views/info-widget-view.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/controller/InfoHandler.py",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/public/index.html",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/public/js/app.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/public/js/views/info-widget-view.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/www/js/models/memory-wdiget-model.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/public/js/models/info-widget-model.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/controller/__init__.py",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/redislive.sublime-workspace",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/__init__.py",
+		"/Library/Python/2.7/site-packages/tornado-2.2-py2.7.egg/tornado/httpserver.py",
+		"/Library/Python/2.7/site-packages/tornado-2.2-py2.7.egg/tornado/iostream.py",
+		"/Library/Python/2.7/site-packages/tornado-2.2-py2.7.egg/tornado/web.py",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/controller/HelloHandler.py",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/app.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/info-widget-view.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/models/info-widget-model.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/index.html",
+		"/Users/nitin/:Users:nitin:Library:Application Support:Sublime Text 2:Packages:User:comment.sublime-snippet",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/templates/info-widget-template.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/models/info.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/info-widget.js",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/Fetch.sublime-settings",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/HTML.sublime-settings",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/underscore/underscore-min.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/backbone/backbone-min.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/redislive.sublime-project",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/jquery/jquery-1.7.2.min.js",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/home.html",
+		"/Users/nitin/Desktop/RedisLive/RedisLive/README.md",
+		"/Users/nitin/Desktop/cemeteries.json"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/libs/bootstrap/less",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"%s.%f",
+			"SaveMemoryInfo",
+			"raw_data",
+			"maximized",
+			", ",
+			"comm",
+			"info-widget-tem",
+			"    })  ",
+			"hr",
+			"date",
+			"date-control-template\n\ndate-control-template",
+			"UTC",
+			"\"></",
+			"info",
+			"fe",
+			"views",
+			">",
+			"viewHolder",
+			"30",
+			"maxclients",
+			"limit",
+			"ulimit",
+			"connection"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"%s",
+			"model.data",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/main.py",
+					"settings":
+					{
+						"buffer_size": 1279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1211,
+								1211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/dataprovider/redisprovider.py",
+					"settings":
+					{
+						"buffer_size": 6999,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2172,
+								2172
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 685.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"mai",
+				"main.py"
+			],
+			[
+				"apps",
+				"www/js/app.js"
+			],
+			[
+				"con",
+				"config.ini"
+			],
+			[
+				"basec",
+				"api/controller/BaseController.py"
+			],
+			[
+				"ma",
+				"main.py"
+			],
+			[
+				"mon",
+				"redis_monitor.py"
+			],
+			[
+				"redis.p",
+				"dataprovider/redis.py"
+			],
+			[
+				"sql",
+				"dataprovider/sqlite.py"
+			],
+			[
+				"mo",
+				"redis_monitor.py"
+			],
+			[
+				"redi",
+				"redis_monitor.py"
+			],
+			[
+				"topco",
+				"www/js/views/top-commands-widget-view.js"
+			],
+			[
+				"topke",
+				"www/js/views/top-keys-widget-view.js"
+			],
+			[
+				"fil",
+				"redis_fill_data.py"
+			],
+			[
+				"keys",
+				"www/js/views/keyspace-widget-view.js"
+			],
+			[
+				"index",
+				"www/index.html"
+			],
+			[
+				"top",
+				"api/controller/TopCommandsController.py"
+			],
+			[
+				"memo",
+				"api/controller/MemoryController.py"
+			],
+			[
+				"topc",
+				"api/controller/TopCommandsController.py"
+			],
+			[
+				"com",
+				"api/controller/CommandsController.py"
+			],
+			[
+				"monitor",
+				"redis_monitor.py"
+			],
+			[
+				"app",
+				"www/js/app.js"
+			],
+			[
+				"main",
+				"main.py"
+			],
+			[
+				"ind",
+				"www/index.html"
+			],
+			[
+				"fill",
+				"redis_fill_data.py"
+			],
+			[
+				"moni",
+				"redis_monitor.py"
+			],
+			[
+				"mem",
+				"www/js/views/memory-widget-view.js"
+			],
+			[
+				"basew",
+				"www/js/views/base-widget-view.js"
+			],
+			[
+				"base",
+				"www/js/views/base-widget-view.js"
+			],
+			[
+				"readw",
+				"www/js/views/readwrite-widget-view.js"
+			],
+			[
+				"conf",
+				"config.ini"
+			],
+			[
+				"comma",
+				"www/js/views/commands-widget-view.js"
+			],
+			[
+				"inde",
+				"www/index.html"
+			],
+			[
+				"keysp",
+				"api/controller/KeySpaceController.py"
+			],
+			[
+				"baseco",
+				"api/controller/BaseController.py"
+			],
+			[
+				"read",
+				"www/js/views/readwrite-widget-view.js"
+			],
+			[
+				"info",
+				"api/controller/InfoController.py"
+			],
+			[
+				"m",
+				"main.py"
+			],
+			[
+				"keysco",
+				"api/controller/KeysController.py"
+			],
+			[
+				"keyswi",
+				"www/js/views/keys-widget-view.js"
+			],
+			[
+				"memory",
+				"www/js/views/memory-widget-view.js"
+			],
+			[
+				"key",
+				"www/js/views/keyspace-widget-view.js"
+			],
+			[
+				"i",
+				"www/index.html"
+			],
+			[
+				"server",
+				"www/js/views/serverlist-view.js"
+			],
+			[
+				"",
+				"www/js/views/base-widget-view.js"
+			],
+			[
+				"infocon",
+				"api/controller/InfoController.py"
+			],
+			[
+				"info-w",
+				"www/js/models/info-widget-model.js"
+			],
+			[
+				"app.",
+				"www/js/app.js"
+			],
+			[
+				"memory-w",
+				"www/js/views/memory-widget-view.js"
+			],
+			[
+				"basewid",
+				"www/js/views/base-widget-view.js"
+			],
+			[
+				"basecon",
+				"api/controller/BaseController.py"
+			],
+			[
+				"main.",
+				"main.py"
+			],
+			[
+				"memor",
+				"www/js/views/memory-widget-view.js"
+			],
+			[
+				"ba",
+				"api/controller/BaseController.py"
+			],
+			[
+				"memorywi",
+				"www/js/views/memory-widget-view.js"
+			],
+			[
+				"mm",
+				"www/js/models/memory-widget-model.js"
+			],
+			[
+				"bas",
+				"api/controller/BaseController.py"
+			],
+			[
+				"memory.py",
+				"api/controller/MemoryController.py"
+			],
+			[
+				"widget",
+				"www/js/libs/bootstrap/less/widget.less"
+			],
+			[
+				"incd",
+				"js/libs/underscore/underscore-min.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 293.0,
+	"status_bar_visible": true
+}
