@@ -19,19 +19,19 @@ var App = {
             model : new ServerListModel()
         })
 
-        // var infoWidget = new InfoWidget({
+        var infoWidget = new InfoWidget({
             
-        //     el : $("#info-widget-placeholder"),
+            el : $("#info-widget-placeholder"),
             
-        //     model : new InfoWidgetModel()
-        // })
+            model : new InfoWidgetModel()
+        })
 
-        // var memoryWidget = new MemoryWidget({
+        var memoryWidget = new MemoryWidget({
             
-        //     el : $("#memory-widget-placeholder"),
+            el : $("#memory-widget-placeholder"),
             
-        //     model : new MemoryWidgetModel()
-        // })  
+            model : new MemoryWidgetModel()
+        })  
 
         var commandsWidget = new CommandsWidget({
             
