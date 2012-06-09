@@ -36,16 +36,10 @@ class RedisStatsProvider(object):
 	def SaveMonitorCommand(self, server, datetime, command, keyname, argument):
 		argument = ""
 		query = "INSERT INTO monitor(datetime, command, keyname, arguments, server) VALUES (\'" + datetime.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + command + "\',\'" + keyname + "\',\'" + argument + "\',\'" + server + "\')"
-		print query
-
 		c = self.conn.cursor()	
 		c.execute(query)
 		self.conn.commit()
 		c.close()		
-
-	
-
-
 
 	def GetInfo(self, server):
 		info = {}
@@ -53,7 +47,7 @@ class RedisStatsProvider(object):
 		for row in c.execute("select info from info where server='" + server + "' order by datetime desc limit 1;"):
 			info = json.loads(row[0])
 
-		c.close()
+		c.close()		
 		return info	
 
 	def GetMemoryInfo(self, server, fromDate, toDate):
@@ -64,8 +58,7 @@ class RedisStatsProvider(object):
 
 		query = """select  strftime('%Y-%m-%d %H:%M:%S',datetime), max, current from memory 
 								where datetime >= '""" + fromDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and datetime <='""" + toDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and server='""" + server + """'
-								order by datetime"""
-		print query
+								order by datetime"""	
 
 		c = self.conn.cursor()				
 		for row in c.execute(query):
@@ -99,9 +92,6 @@ class RedisStatsProvider(object):
 								group by strftime('%Y-%m-%d %H:%M:%S',datetime) 
 								order by datetime desc """
 
-
-		print query
-
 		memoryData = []
 		
 		c = self.conn.cursor()		
@@ -119,8 +109,6 @@ class RedisStatsProvider(object):
 				where datetime >= '""" + fromDate.strftime('%Y-%m-%d %H:%M:%S') + """' and datetime <='""" + toDate.strftime('%Y-%m-%d %H:%M:%S') + """' and server='""" + server + """'
 				group by command order by total				
 				"""
-
-		print query
 
 		memoryData = []
 		
@@ -140,9 +128,7 @@ class RedisStatsProvider(object):
 				where datetime >= '""" + fromDate.strftime('%Y-%m-%d %H:%M:%S') + """' and datetime <='""" + toDate.strftime('%Y-%m-%d %H:%M:%S') + """' and server='""" + server + """'
 				group by keyname order by total desc 
 				limit 10				
-				"""
-
-		print query
+				"""		
 
 		memoryData = []
 		
@@ -153,37 +139,4 @@ class RedisStatsProvider(object):
 		c.close()
 		return memoryData
 
-
-
-
-
-
-
-
-
-
-
-
-
-	#
-	# not evaluated yet
-	#
-
-
-	
-
-	def GetRealTimeKeysInfo(self, server):
-		""" Gets real time stats for Keys
-		"""		
-		keyData = []		
-		c = self.conn.cursor()		
-		for row in c.execute("select expire, persist from keys where server = '" + server + "' order by datetime desc limit 1;"):
-			keyData.append([row[0], row[1]])
-
-		c.close()
-		return keyData
-
-
-
-
-
+		

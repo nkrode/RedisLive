@@ -8,8 +8,8 @@ import traceback
 import datetime
 
 
-#from dataprovider.sqliteprovider import RedisStatsProvider
-from dataprovider.redisprovider import RedisStatsProvider
+from dataprovider.sqliteprovider import RedisStatsProvider
+#from dataprovider.redisprovider import RedisStatsProvider
 
 
 class Monitor():
@@ -173,7 +173,7 @@ def main():
 		info = InfoThread(redisServer["server"], redisServer["port"])		
 		threads.append(info)
 		info.setDaemon(True)
-		#info.start()
+		info.start()
 
 
 
