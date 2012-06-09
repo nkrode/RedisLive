@@ -9,8 +9,7 @@ class InfoController(BaseController):
   def get(self):
 
     server = self.get_argument("server")
-
-    #redisInfo = self.redisClient.info()
+    
     redisInfo = self.statsProvider.GetInfo(server)
     
     databases=[]

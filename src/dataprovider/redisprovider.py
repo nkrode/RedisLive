@@ -112,31 +112,34 @@ class RedisStatsProvider(object):
 
 
 	def GetInfo(self, server):
-		info = {}
-		c = self.conn.cursor()		
-		for row in c.execute("select info from info where server='" + server + "' order by datetime desc limit 1;"):
-			info = json.loads(row[0])
+		# info = {}
+		# c = self.conn.cursor()		
+		# for row in c.execute("select info from info where server='" + server + "' order by datetime desc limit 1;"):
+		# 	info = json.loads(row[0])
 
-		c.close()
-		return info	
+		# c.close()
+		# return info	
+		pass
 
 	def GetMemoryInfo(self, server, fromDate, toDate):
 		""" Gets stats for Memory Consumption between a range of dates
 		"""				
 		
-		memoryData = []			
+		# memoryData = []			
 
-		query = """select  strftime('%Y-%m-%d %H:%M:%S',datetime), max, current from memory 
-								where datetime >= '""" + fromDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and datetime <='""" + toDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and server='""" + server + """'
-								order by datetime"""
-		print query
+		# query = """select  strftime('%Y-%m-%d %H:%M:%S',datetime), max, current from memory 
+		# 						where datetime >= '""" + fromDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and datetime <='""" + toDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and server='""" + server + """'
+		# 						order by datetime"""
+		# print query
 
-		c = self.conn.cursor()				
-		for row in c.execute(query):
-			memoryData.append([row[0], row[1], row[2]])
-		c.close()
+		# c = self.conn.cursor()				
+		# for row in c.execute(query):
+		# 	memoryData.append([row[0], row[1], row[2]])
+		# c.close()
 
-		return memoryData
+		# return memoryData
+
+		pass
 
 	def GetCommandStats(self, server, fromDate, toDate, groupBy):
 		""" Gets commands processed per second list in the given date range
@@ -246,33 +249,4 @@ class RedisStatsProvider(object):
 
 		return resultData
 
-
-
-
-
-
-
-
-
-
-
-
-
-	#
-	# not evaluated yet
-	#
-
-
-	
-
-	def GetRealTimeKeysInfo(self, server):
-		""" Gets real time stats for Keys
-		"""		
-		keyData = []		
-		c = self.conn.cursor()		
-		for row in c.execute("select expire, persist from keys where server = '" + server + "' order by datetime desc limit 1;"):
-			keyData.append([row[0], row[1]])
-
-		c.close()
-		return keyData
-
+		
