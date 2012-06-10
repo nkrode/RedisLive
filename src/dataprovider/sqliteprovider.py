@@ -2,40 +2,40 @@ import sqlite3
 import json
 
 class RedisStatsProvider(object):
-	""" A Sqlite based persistance to store and fetch stats data
+	""" A Sqlite based persistance to store and fetch stats
 	"""
 
 	def __init__(self):
 		self.conn = sqlite3.connect('db/redislive.sqlite')		
 	
 	
-	def SaveMemoryInfo(self, server, datetime, used, peak):
+	def SaveMemoryInfo(self, server, timestamp, used, peak):
 		""" Saves Memory Info
 		"""
 		c = self.conn.cursor()
-		c.execute("INSERT INTO memory VALUES (\'" + datetime.strftime('%Y-%m-%d %H:%M:%S') + "\'," + str(used) + "," + str(peak) + ",\'" + server + "\')")
+		c.execute("INSERT INTO memory VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\'," + str(used) + "," + str(peak) + ",\'" + server + "\')")
 		self.conn.commit()
 		c.close()	
 
-	def SaveInfoCommand(self, server, datetime, info):
+	def SaveInfoCommand(self, server, timestamp, info):
 		""" Save Redis info command dump
 		"""
 		c = self.conn.cursor()	
-		c.execute("INSERT INTO info VALUES (\'" + datetime.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + json.dumps(info) + "\',\'" + server + "\')")
+		c.execute("INSERT INTO info VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + json.dumps(info) + "\',\'" + server + "\')")
 		self.conn.commit()
 		c.close()
 
-	def SaveKeysInfo(self, server, datetime, expire, persist):
+	def SaveKeysInfo(self, server, timestamp, expire, persist):
 		""" Saves expire vs persist info
 		"""
 		c = self.conn.cursor()
-		c.execute("INSERT INTO keys VALUES (\'" + datetime.strftime('%Y-%m-%d %H:%M:%S') + "\'," + str(expire) + "," + str(persist) + ",\'" + server + "\')")
+		c.execute("INSERT INTO keys VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\'," + str(expire) + "," + str(persist) + ",\'" + server + "\')")
 		self.conn.commit()
 		c.close()
 
-	def SaveMonitorCommand(self, server, datetime, command, keyname, argument):
+	def SaveMonitorCommand(self, server, timestamp, command, keyname, argument):
 		argument = ""
-		query = "INSERT INTO monitor(datetime, command, keyname, arguments, server) VALUES (\'" + datetime.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + command + "\',\'" + keyname + "\',\'" + argument + "\',\'" + server + "\')"
+		query = "INSERT INTO monitor(datetime, command, keyname, arguments, server) VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + command + "\',\'" + keyname + "\',\'" + argument + "\',\'" + server + "\')"
 		c = self.conn.cursor()	
 		c.execute(query)
 		self.conn.commit()
