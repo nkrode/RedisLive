@@ -214,14 +214,6 @@
 				"buffer_size": 1279,
 				"line_ending": "Unix"
 			}
-		},
-		{
-			"file": "src/dataprovider/redisprovider.py",
-			"settings":
-			{
-				"buffer_size": 6999,
-				"line_ending": "Unix"
-			}
 		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
@@ -356,11 +348,21 @@
 	},
 	"file_history":
 	[
+		"/Users/nk/Desktop/RedisLive/src/main.py",
+		"/Users/nk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/nk/Desktop/RedisLive/src/www/index.html",
+		"/Users/nk/Desktop/RedisLive/src/dataprovider/sqliteprovider.py",
+		"/Users/nk/Desktop/RedisLive/src/www/js/app.js",
+		"/Users/nk/Desktop/RedisLive/src/api/controller/InfoController.py",
+		"/Users/nk/Desktop/RedisLive/src/redis_monitor.py",
+		"/Users/nk/Desktop/RedisLive/src/api/controller/BaseController.py",
+		"/Users/nk/Desktop/RedisLive/src/dataprovider/redisprovider.py",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/base-widget-view.js",
+		"/Users/nk/Desktop/RedisLive/src/config.ini",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_monitor.py",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/app.js",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/api/controller/BaseController.py",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/config.ini",
-		"/Users/nk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_fill_data.py",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_fill_data2.py",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/main.py",
@@ -473,9 +475,7 @@
 		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/backbone/backbone-min.js",
 		"/Users/nitin/Desktop/RedisLive/RedisLive/redislive.sublime-project",
 		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/jquery/jquery-1.7.2.min.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/home.html",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/README.md",
-		"/Users/nitin/Desktop/cemeteries.json"
+		"/Users/nitin/Desktop/RedisLive/RedisLive/home.html"
 	],
 	"find":
 	{
@@ -538,7 +538,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -565,33 +565,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/dataprovider/redisprovider.py",
-					"settings":
-					{
-						"buffer_size": 6999,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2172,
-								2172
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 685.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -641,36 +614,72 @@
 		"selected_items":
 		[
 			[
-				"mai",
-				"main.py"
-			],
-			[
-				"apps",
-				"www/js/app.js"
-			],
-			[
-				"con",
-				"config.ini"
-			],
-			[
-				"basec",
-				"api/controller/BaseController.py"
-			],
-			[
-				"ma",
-				"main.py"
+				"inde",
+				"www/index.html"
 			],
 			[
 				"mon",
 				"redis_monitor.py"
 			],
 			[
-				"redis.p",
-				"dataprovider/redis.py"
+				"ma",
+				"main.py"
+			],
+			[
+				"info",
+				"api/controller/InfoController.py"
+			],
+			[
+				"app",
+				"www/js/app.js"
 			],
 			[
 				"sql",
-				"dataprovider/sqlite.py"
+				"dataprovider/sqliteprovider.py"
+			],
+			[
+				"basec",
+				"api/controller/BaseController.py"
+			],
+			[
+				"mai",
+				"main.py"
+			],
+			[
+				"redisp",
+				"dataprovider/redisprovider.py"
+			],
+			[
+				"in",
+				"www/index.html"
+			],
+			[
+				"apps",
+				"www/js/app.js"
+			],
+			[
+				"redis",
+				"dataprovider/redisprovider.py"
+			],
+			[
+				"basewi",
+				"www/js/views/base-widget-view.js"
+			],
+			[
+				"baseco",
+				"api/controller/BaseController.py"
+			],
+			[
+				"conf",
+				"config.ini"
+			],
+			[
+				"con",
+				"config.ini"
+			],
+			[
+				"redis.p",
+				"dataprovider/redis.py"
 			],
 			[
 				"mo",
@@ -721,10 +730,6 @@
 				"redis_monitor.py"
 			],
 			[
-				"app",
-				"www/js/app.js"
-			],
-			[
 				"main",
 				"main.py"
 			],
@@ -757,32 +762,16 @@
 				"www/js/views/readwrite-widget-view.js"
 			],
 			[
-				"conf",
-				"config.ini"
-			],
-			[
 				"comma",
 				"www/js/views/commands-widget-view.js"
-			],
-			[
-				"inde",
-				"www/index.html"
 			],
 			[
 				"keysp",
 				"api/controller/KeySpaceController.py"
 			],
 			[
-				"baseco",
-				"api/controller/BaseController.py"
-			],
-			[
 				"read",
 				"www/js/views/readwrite-widget-view.js"
-			],
-			[
-				"info",
-				"api/controller/InfoController.py"
 			],
 			[
 				"m",
@@ -890,7 +879,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 293.0,
 	"status_bar_visible": true
 }
