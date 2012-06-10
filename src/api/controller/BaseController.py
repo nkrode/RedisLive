@@ -4,8 +4,8 @@ import redis
 import re
 import dateutil.parser
 
-#from dataprovider.sqliteprovider import RedisStatsProvider
-from dataprovider.redisprovider import RedisStatsProvider
+from dataprovider.sqliteprovider import RedisStatsProvider
+#from dataprovider.redisprovider import RedisStatsProvider
 
 from api.util.RDP import rdp
 
