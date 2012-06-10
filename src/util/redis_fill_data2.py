@@ -2,7 +2,7 @@ import redis
 from time import strftime
 import time
 
-from dataprovider.sqlite import RedisStatsProvider
+
 
 def monitor():
 	redisHost = "127.0.0.1"
