@@ -8,8 +8,8 @@ import traceback
 import datetime
 
 
-from dataprovider.sqliteprovider import RedisStatsProvider
-#from dataprovider.redisprovider import RedisStatsProvider
+#from dataprovider.sqliteprovider import RedisStatsProvider
+from dataprovider.redisprovider import RedisStatsProvider
 
 
 class Monitor():
