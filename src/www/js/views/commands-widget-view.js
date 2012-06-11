@@ -15,10 +15,9 @@ var CommandsWidget = BaseWidget.extend({
 
       // chart
       this.chart = new google.visualization.AreaChart($("#commands-widget-chart").empty().get(0))
-      this.dataTable = new google.visualization.DataTable();
+      this.dataTable = new google.visualization.DataTable()
       this.dataTable.addColumn('datetime', 'datetime')
-      this.dataTable.addColumn('number', 'Commands Processed');         
-      
+      this.dataTable.addColumn('number', 'Commands Processed')      
     }
 
   , render : function() {
@@ -44,23 +43,17 @@ var CommandsWidget = BaseWidget.extend({
                       title : ''
                     , colors: [ '#17BECF', '#9EDAE5' ]
                     , isStacked: true
-                    , chartArea: {'width': '85%'}
+                    , chartArea: { 'width' : '85%'}
                     , pointSize: pointSize 
                     , "hAxis.slantedText" : "true"
                     , "hAxis.slantedTextAngle" : "90" 
-                    , areaOpacity : .9,
-                      width: "100%" ,
-                      height: 200,
-                       animation: {
-                                    duration: 500,
-                                    easing: 'out'
-                                  }
-                      
-                    , vAxis: { minValue:0}                    
+                    , areaOpacity : .9
+                    , width : "100%"
+                    , height : 200
+                    , animation : { duration : 500, easing: 'out' }
+                    , vAxis: { minValue : 0 }                    
                     }
 
-      this.chart.draw(this.dataTable, options)    
-
-    }  
-
+      this.chart.draw(this.dataTable, options)
+    }
 })
