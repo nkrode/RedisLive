@@ -30,8 +30,7 @@ class Monitor():
 
     def monitor(self):
         if self.connection is None:
-            self.connection = self.connection_pool.get_connection(
-                'monitor', None)
+            self.connection = self.connection_pool.get_connection('monitor', None)
         self.connection.send_command("monitor")
         return self.listen()
 
@@ -134,20 +133,20 @@ class InfoThread(threading.Thread):
 				statsProvider.SaveMemoryInfo(self.id, currentTime, used_memory, peak_memory)
 				statsProvider.SaveInfoCommand(self.id, currentTime, redisInfo)	
 
-				databases=[]
-				for key in sorted(redisInfo.keys()):
-					if key.startswith("db"):
-						database = redisInfo[key]
-						database['name']=key
-						databases.append(database)
+				# databases=[]
+				# for key in sorted(redisInfo.keys()):
+				# 	if key.startswith("db"):
+				# 		database = redisInfo[key]
+				# 		database['name']=key
+				# 		databases.append(database)
 
-				expires=0
-				persists=0
-				for database in databases:
-					expires+=database.get("expires")
-					persists+=database.get("keys")-database.get("expires")
+				# expires=0
+				# persists=0
+				# for database in databases:
+				# 	expires+=database.get("expires")
+				# 	persists+=database.get("keys")-database.get("expires")
 
-				statsProvider.SaveKeysInfo(self.id, currentTime, expires, persists)
+				# statsProvider.SaveKeysInfo(self.id, currentTime, expires, persists)
 
 				time.sleep(1)
 
@@ -178,7 +177,8 @@ def main():
 
 
 	try:
-		while True: time.sleep(100)
+		while True: 
+			pass
 	except (KeyboardInterrupt, SystemExit):
 		for t in threads:
 			t.stop()

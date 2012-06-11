@@ -50,34 +50,6 @@
           </div>
       </div>
     </div>
-    <hr>    
-
-    
-
-    <!-- keys-widget AND keyspace-widget -->
-    <div class="row-fluid">
-      <div class="span12">
-         <div class="row-fluid">
-            <!-- keys-widget -->
-            <div class="span3" id="keys-widget-placeholder"></div>
-            <!-- keyspace widget -->
-            <div class="span9" id="keyspace-widget-placeholder"></div>
-          </div>
-      </div>
-    </div>
-    <hr>
-
-    <!-- ReadWrite widget -->
-    <div class="row-fluid" id="readwrite-widget-placeholder"></div>
-    <hr>
-    
-    <!-- Get/Set Ratio widget -->
-    <div class="row-fluid">
-      <div id="getsetratio2-widget-placeholder" class="span6 widget"></div>
-      <div id="getsetratio3-widget-placeholder" class="span6 widget"></div>
-    </div>
-
-    
 
   </div>
   <!-- End Container -->
@@ -107,8 +79,10 @@
 
   <script type="text/javascript" src="js/models/serverlist-model.js"></script>   
   <script type="text/javascript" src="js/views/serverlist-view.js"></script>
+  
   <script type="text/javascript" src="js/models/info-widget-model.js"></script>
   <script type="text/javascript" src="js/views/info-widget-view.js"></script>
+  
   <script type="text/javascript" src="js/models/memory-widget-model.js"></script>
   <script type="text/javascript" src="js/views/memory-widget-view.js"></script>
   
@@ -121,12 +95,6 @@
   <script type="text/javascript" src="js/models/top-keys-widget-model.js"></script>
   <script type="text/javascript" src="js/views/top-keys-widget-view.js"></script>
   
-  <script type="text/javascript" src="js/models/readwrite-widget-model.js"></script>
-  <script type="text/javascript" src="js/views/readwrite-widget-view.js"></script>
-  <script type="text/javascript" src="js/models/keys-widget-model.js"></script>
-  <script type="text/javascript" src="js/views/keys-widget-view.js"></script>
-  <script type="text/javascript" src="js/models/keyspace-widget-model.js"></script>
-  <script type="text/javascript" src="js/views/keyspace-widget-view.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   
   <script type="text/javascript">
@@ -278,53 +246,7 @@
       </div>      
     </div>
     <div id="top-keys-widget-chart"></div>    
-  </script>
-
- <!-- ReadWrite widget template 
-  ================================================== -->
-  <script type="text/x-handlebars-template" id="readwrite-widget-template">
-    <div class="span12">
-      <div class="row-fluid">              
-        <div class="span2">
-          <h3>Read vs Writes</h3>              
-        </div>
-        <div class="" style="float:right">
-          {{> date-dropdown}}                                       
-        </div>
-      </div>
-      <div id="readwrite-widget-chart"></div>         
-    </div>
-  </script>
-
-  <!-- Keys widget template 
-  ================================================== -->
-  <script type="text/x-handlebars-template" id="keys-widget-template">      
-    <div class="row-fluid">              
-      <div class="span6">
-        <h3>Keys - Expire vs Persist</h3>              
-      </div>
-      <!--
-      <div class="" style="float:right">
-        {{> date-dropdown}}                                
-      </div>
-      -->
-    </div>
-    <div id="keys-widget-chart"></div>    
-  </script>
-
-  <!-- Keyspace widget template 
-  ================================================== -->
-  <script type="text/x-handlebars-template" id="keyspace-widget-template">      
-    <div class="row-fluid">              
-      <div class="span6">
-        <h3>Keyspace</h3>              
-      </div>
-      <div class="" style="float:right">
-        {{> date-dropdown}}                                       
-      </div>
-    </div>
-    <div id="keyspace-widget-chart"></div>     
-  </script>
+  </script> 
 
   <!-- Date Drop down template
   ================================================== -->

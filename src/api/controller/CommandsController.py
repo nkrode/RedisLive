@@ -28,16 +28,16 @@ class CommandsController(BaseController):
       start = dateutil.parser.parse(fromDate)
       end   = dateutil.parser.parse(toDate)
 
-    difference = end - start
-    weeks, days = divmod(difference.days, 7)
-    minutes, seconds = divmod(difference.seconds, 60)
-    hours, minutes = divmod(minutes, 60)
+    difference = end - start    
+    minutes = difference.total_seconds() / 60
+    hours = minutes / 60
+    seconds = difference.total_seconds()
 
-    if difference.days > 0:
+    if hours > 120:
       groupBy = "day"
-    elif hours > 1:        
+    elif minutes > 120 :        
       groupBy = "hour"              
-    elif hours > 0:
+    elif seconds > 120:
       groupBy = "minute"      
     else:
       groupBy = "second"

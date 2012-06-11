@@ -2,12 +2,10 @@ import sqlite3
 import json
 
 class RedisStatsProvider(object):
-	""" A Sqlite based persistance to store and fetch stats
-	"""
+	"A Sqlite based persistance to store and fetch stats"
 
 	def __init__(self):
-		self.conn = sqlite3.connect('db/redislive.sqlite')		
-	
+		self.conn = sqlite3.connect('db/redislive.sqlite')	
 	
 	def SaveMemoryInfo(self, server, timestamp, used, peak):
 		""" Saves Memory Info
@@ -18,22 +16,14 @@ class RedisStatsProvider(object):
 		c.close()	
 
 	def SaveInfoCommand(self, server, timestamp, info):
-		""" Save Redis info command dump
-		"""
+		"Save Redis info command dump"
 		c = self.conn.cursor()	
 		c.execute("INSERT INTO info VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + json.dumps(info) + "\',\'" + server + "\')")
 		self.conn.commit()
 		c.close()
-
-	def SaveKeysInfo(self, server, timestamp, expire, persist):
-		""" Saves expire vs persist info
-		"""
-		c = self.conn.cursor()
-		c.execute("INSERT INTO keys VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\'," + str(expire) + "," + str(persist) + ",\'" + server + "\')")
-		self.conn.commit()
-		c.close()
-
+	
 	def SaveMonitorCommand(self, server, timestamp, command, keyname, argument):
+		"save information about every command"
 		argument = ""
 		query = "INSERT INTO monitor(datetime, command, keyname, arguments, server) VALUES (\'" + timestamp.strftime('%Y-%m-%d %H:%M:%S') + "\',\'" + command + "\',\'" + keyname + "\',\'" + argument + "\',\'" + server + "\')"
 		c = self.conn.cursor()	
@@ -42,6 +32,7 @@ class RedisStatsProvider(object):
 		c.close()		
 
 	def GetInfo(self, server):
+		"Get info about the server"
 		info = {}
 		c = self.conn.cursor()		
 		for row in c.execute("select info from info where server='" + server + "' order by datetime desc limit 1;"):
@@ -51,8 +42,7 @@ class RedisStatsProvider(object):
 		return info	
 
 	def GetMemoryInfo(self, server, fromDate, toDate):
-		""" Gets stats for Memory Consumption between a range of dates
-		"""				
+		"Get stats for Memory Consumption between a range of dates"
 		
 		memoryData = []			
 
@@ -118,7 +108,6 @@ class RedisStatsProvider(object):
 
 		c.close()
 		return memoryData
-
 
 	def GetTopKeysStats(self, server, fromDate, toDate):
 		""" Gets top commands processed 

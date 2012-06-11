@@ -138,6 +138,7 @@ var BaseWidget = Backbone.View.extend({
       this.$el.find('[name=from]').val(this.ISODateString(startDate))
       this.$el.find('[name=to]').val(this.ISODateString(endDate))              
       this.UpdateModel(false)
+
     }
   }
 
