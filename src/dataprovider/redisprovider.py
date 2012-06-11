@@ -2,12 +2,12 @@ from datetime import date, datetime, timedelta
 from dateutil import parser
 import redis
 import json
+import ast
 
 
 class RedisStatsProvider(object):
-	""" 
-	A Redis based persistance to store and fetch stats
-	"""
+	"A Redis based persistance to store and fetch stats"
+
 	def __init__(self):
 		self.server = "localhost"
 		self.port = 6381
@@ -19,19 +19,13 @@ class RedisStatsProvider(object):
 		self.conn.zadd(server+":memory", timestamp.strftime('%s'), data )
 
 	def SaveInfoCommand(self, server, timestamp, info):
-		"save redis info command raw dump"
-		data = { "timestamp" : timestamp.strftime('%s'), "info" : info }
-		self.conn.zadd(server+":info", timestamp.strftime('%s'), data )
-
-	def SaveKeysInfo(self, server, timestamp, expire, persist):
-		"save expire vs persist info"
-		data = { "timestamp" : timestamp.strftime('%s'), "expire" : expire, "persist" : persist }
-		self.conn.zadd(server+":keys", timestamp.strftime('%s'), data )
+		"Save Redis info command dump"
+		self.conn.set(server + ":Info", json.dumps(info))
 
 	def SaveMonitorCommand(self, server, timestamp, command, keyname, argument):
-		"save info for every command that runs on redis"
+		"save information about every command"
 
-		print timestamp.strftime('%H:%M:%S') + " : " + command + " : " + keyname
+		#print timestamp.strftime('%H:%M:%S') + " : " + command + " : " + keyname
 		
 		# current time
 		epoch = timestamp.strftime('%s')
@@ -58,11 +52,11 @@ class RedisStatsProvider(object):
 		pipeline.hincrby(commandCountKeyName, epoch, 1)
 
 		commandCountKeyName = server + ":CommandCountByMinute"	
-		fieldName = currentDate + ":" + timestamp.hour + ":" + timestamp.minute
+		fieldName = currentDate + ":" + str(timestamp.hour) + ":" + str(timestamp.minute)
 		pipeline.hincrby(commandCountKeyName, fieldName, 1)
 
 		commandCountKeyName = server + ":CommandCountByHour"	
-		fieldName = currentDate + ":" + timestamp.hour		
+		fieldName = currentDate + ":" + str(timestamp.hour)
 		pipeline.hincrby(commandCountKeyName, fieldName, 1)
 
 		commandCountKeyName = server + ":CommandCountByDay"
@@ -73,38 +67,26 @@ class RedisStatsProvider(object):
 		pipeline.execute()				
 
 	def GetInfo(self, server):
-		# info = {}
-		# c = self.conn.cursor()		
-		# for row in c.execute("select info from info where server='" + server + "' order by datetime desc limit 1;"):
-		# 	info = json.loads(row[0])
-
-		# c.close()
-		# return info	
-		pass
+		"Get info about the server"
+		info = self.conn.get(server + ":Info")		
+		info = json.loads(info)
+		return info
 
 	def GetMemoryInfo(self, server, fromDate, toDate):
-		""" Gets stats for Memory Consumption between a range of dates
-		"""				
-		
-		# memoryData = []			
+		"Get stats for Memory Consumption between a range of dates"		
+		memoryData = []
+		start = int(fromDate.strftime("%s"))
+		end = int(toDate.strftime("%s"))		
+		rows = self.conn.zrangebyscore(server+":memory", start, end)
 
-		# query = """select  strftime('%Y-%m-%d %H:%M:%S',datetime), max, current from memory 
-		# 						where datetime >= '""" + fromDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and datetime <='""" + toDate.strftime('%Y-%m-%d %H:%M:%S')  + """' and server='""" + server + """'
-		# 						order by datetime"""
-		# print query
+		for row in rows:			
+			row = ast.literal_eval(row)			
+			memoryData.append([datetime.fromtimestamp(int(row['timestamp'])).strftime('%Y-%m-%d %H:%M:%S'),row['peak'], row['used']])		
 
-		# c = self.conn.cursor()				
-		# for row in c.execute(query):
-		# 	memoryData.append([row[0], row[1], row[2]])
-		# c.close()
-
-		# return memoryData
-
-		pass
+		return memoryData		
 
 	def GetCommandStats(self, server, fromDate, toDate, groupBy):
 		"Get total commands processed in the given time period"
-
 		s = []
 		timeStamps = []
 		keyName = ""
@@ -117,7 +99,7 @@ class RedisStatsProvider(object):
 				timeStamps.append(t.strftime('%s'))
 				t = t + timedelta(days=1)
 
-		if groupBy=="hour":
+		elif groupBy=="hour":
 			keyName = server + ":CommandCountByHour"			
 
 			t = fromDate
@@ -126,17 +108,17 @@ class RedisStatsProvider(object):
 				s.append(fieldName)
 				timeStamps.append(t.strftime('%s'))
 				t = t + timedelta(seconds=3600)
-
+			
 		elif groupBy=="minute":
-			keyName = server + ":CommandCountByHour"			
+			keyName = server + ":CommandCountByMinute"			
 
 			t = fromDate
-			while t<= toDate:
-				fieldName = t.strftime('%y%m%d') + ":" + str(t.hour)
+			while t<= toDate:				
+				fieldName = t.strftime('%y%m%d') + ":" + str(t.hour) + ":" + str(t.minute)
 				s.append(fieldName)
 				timeStamps.append(t.strftime('%s'))
-				t = t + timedelta(seconds=3600)
-
+				t = t + timedelta(seconds=60)
+			
 		else:
 			keyName = server + ":CommandCountBySecond"			
 			start = int(fromDate.strftime("%s"))
@@ -144,7 +126,6 @@ class RedisStatsProvider(object):
 			for x in range(start, end+1):
 				s.append(str(x))
 				timeStamps.append(x)
-		
 
 		data = []
 		counts = self.conn.hmget(keyName, s)
@@ -154,7 +135,7 @@ class RedisStatsProvider(object):
 			if groupBy == "hour" :
 				data.append([ 0 if counts[x]==None else int(counts[x]), datetime.fromtimestamp(int(timeStamps[x])).strftime('%Y-%m-%d %H:00:00') ])
 			if groupBy == "minute" :
-				data.append([ 0 if counts[x]==None else int(counts[x]), datetime.fromtimestamp(int(timeStamps[x])).strftime('%Y-%m-%d %H:00:00') ])
+				data.append([ 0 if counts[x]==None else int(counts[x]), datetime.fromtimestamp(int(timeStamps[x])).strftime('%Y-%m-%d %H:%M:00') ])
 			else:
 				data.append([ 0 if counts[x]==None else int(counts[x]), datetime.fromtimestamp(int(timeStamps[x])).strftime('%Y-%m-%d %H:%M:%S') ])		
 
@@ -169,13 +150,7 @@ class RedisStatsProvider(object):
 		return self.GetTopCounts(server, fromDate, toDate, "KeyCount", "DailyKeyCount")	
 
 
-
-
-
-	#
 	# Helper methods
-	#
-
 	def GetTopCounts(self, server, fromDate, toDate, secondsKeyName, dayKeyName, resultCount=10):
 		"""
 		Top counts are stored in a sorted set for every second and for every day		
