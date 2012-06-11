@@ -15,11 +15,10 @@ var MemoryWidget = BaseWidget.extend({
 
       // chart
       this.chart = new google.visualization.LineChart($("#memory-widget-chart").empty().get(0))
-      this.dataTable = new google.visualization.DataTable();
+      this.dataTable = new google.visualization.DataTable()
       this.dataTable.addColumn('datetime', 'datetime')
-      this.dataTable.addColumn('number', 'Max');
-      this.dataTable.addColumn('number', 'Current');            
-      
+      this.dataTable.addColumn('number', 'Max')
+      this.dataTable.addColumn('number', 'Current')      
     }
 
   , render : function() {
@@ -43,23 +42,18 @@ var MemoryWidget = BaseWidget.extend({
       var pointSize = model.data.length > 120 ? 1 : 5
         , options = {
                       title : ''
-                    , colors: ['#1581AA','#77BA44']
-                    , chartArea: {'width': '85%'}
+                    , colors: [ '#1581AA', '#77BA44' ]
+                    , chartArea: { 'width' : '85%' }
                     , pointSize: pointSize 
                     , "hAxis.slantedText" : "true"
                     , "hAxis.slantedTextAngle" : "90" 
-                    , areaOpacity : .9,
-                      width: "100%" ,
-                      height: 200,
-                       animation: {
-                                    duration: 500,
-                                    easing: 'out'
-                                  },
-                      vAxis: {minValue:0},
+                    , areaOpacity : .9
+                    , width : "100%"
+                    , height : 200
+                    , animation : { duration : 500, easing : 'out' }
+                    , vAxis: { minValue : 0 }
                     }
 
-      this.chart.draw(this.dataTable, options)    
-
-    }  
-
+      this.chart.draw(this.dataTable, options)
+    }
 })

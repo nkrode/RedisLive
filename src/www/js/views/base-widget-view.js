@@ -161,5 +161,5 @@ var BaseWidget = Backbone.View.extend({
       console.log(this.Name + ": Error Occured \n" + error + "\n" + model )
 
   }
-      
+        
 })
