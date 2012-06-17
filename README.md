@@ -15,6 +15,14 @@ Quick Start
 + [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
 + Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`
 
+**Configuration**
++ edit **redis-live.conf** and update the value of the key `RedisServers` to the redis instances you want to monitor
+
+**Start RedisLive**
++ start the monitoring script `./redis-monitor.py --duration=120` duration is in seconds (see caveat)
++ start the webserver `./redis-live.py`
++ RedisLive is now running @ http://localhost:8888/index.html
+
 
 
 Caveat on monitoring redis
