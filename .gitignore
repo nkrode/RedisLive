@@ -28,4 +28,4 @@ pip-log.txt
 
 .DS_Store
 
-.sublime-workspace
+*.sublime-workspace
