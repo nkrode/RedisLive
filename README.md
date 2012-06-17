@@ -5,23 +5,22 @@ Visualize your redis instances, analyze query patterns and spikes.
 
 ![Redis Live](https://github.com/kumarnitin/RedisLive/blob/master/design/redis-live.png?raw=true "Redis Live")
 
-Quick Start
+Installation
 ------------
 **Install Dependencies**
 + [tornado](https://github.com/facebook/tornado) `pip install tornado`
 + [redis.py] (https://github.com/andymccurdy/redis-py) `pip install redis`
 
-**Download RedisLive**
-+ [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
-+ Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`
+**Get RedisLive**
++ Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`, or [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
 
 **Configuration**
 + edit **redis-live.conf** and update the value of the key `RedisServers` to the redis instances you want to monitor
 
 **Start RedisLive**
-+ start the monitoring script `./redis-monitor.py --duration=120` duration is in seconds (see caveat)
++ start the monitoring script `./redis-monitor.py --duration=120` duration is in seconds ([see caveat](#caveat-on-monitoring-redis))
 + start the webserver `./redis-live.py`
-+ RedisLive is now running @ http://localhost:8888/index.html
++ RedisLive is now running @ `http://localhost:8888/index.html`
 
 
 
