@@ -8,7 +8,7 @@ Visualize your redis instances, analyze query patterns and spikes.
 Caveat on monitoring redis
 ==========================
 
-Currently the only hook into monitoring a redis instance is Redis [MONITOR](http://redis.io/commands/monitor) command, which streams back every command processed and hence reduces the throughput of the redis instance. 
+Currently the only hook into monitoring a redis instance is Redis [MONITOR](http://redis.io/commands/monitor) command, which streams back every command processed and reduces the throughput of the redis instance. Hence it is recommended to run redis-monitor with --duration suitable for your redis deployment and scheduling it to run periodically as a cron job.
 
 Feedback
 ========
