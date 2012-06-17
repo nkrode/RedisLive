@@ -17,17 +17,8 @@ class BaseController(tornado.web.RequestHandler):
 		parsedDate = dateutil.parser.parse(datetime)
 		return [ parsedDate.year, parsedDate.month, parsedDate.day, parsedDate.hour, parsedDate.minute, parsedDate.second ]
 
-  	def AverageData(self,data):
-  		# data = [("2012-05-06 19:00:00",100,100),
-  		# 		("2012-05-06 19:01:00",300,100),
-  		# 		#("2012-05-06 19:01:10",-100,100),
-  		# 		("2012-05-06 19:01:20",350,100),
-  		# 		("2012-05-06 19:01:21",330,100),
-  		# 		("2012-05-06 19:01:22",590,100),
-  		# 		("2012-05-06 19:01:29",190,100),
-  		# 		("2012-05-06 19:03:00",300,100),
-  		# 		("2012-05-06 19:04:00",300,100),
-  		# 		]
+	# todo : fix this
+  	def AverageData(self,data):  		
   		average = []
 
   		deviation=1024*1024

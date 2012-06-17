@@ -4,13 +4,16 @@ import redis
 import json
 import ast
 
+# redis server to use to store stats
+server = "localhost"
+port = 6381
 
 class RedisStatsProvider(object):
 	"A Redis based persistance to store and fetch stats"
 
 	def __init__(self):
-		self.server = "localhost"
-		self.port = 6381
+		self.server = server
+		self.port = port
 		self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)	
 	
 	def SaveMemoryInfo(self, server, timestamp, used, peak):
@@ -23,11 +26,8 @@ class RedisStatsProvider(object):
 		self.conn.set(server + ":Info", json.dumps(info))
 
 	def SaveMonitorCommand(self, server, timestamp, command, keyname, argument):
-		"save information about every command"
+		"save information about every command"	
 
-		#print timestamp.strftime('%H:%M:%S') + " : " + command + " : " + keyname
-		
-		# current time
 		epoch = timestamp.strftime('%s')
 		currentDate = timestamp.strftime('%y%m%d')
 		
@@ -38,10 +38,12 @@ class RedisStatsProvider(object):
 		# top N are easily available from sorted set in redis
 		# also keep a sorted set for every day
 		# switch to daily stats when stats requsted are for a longer time period		
+				
 		commandCountKeyName = server + ":CommandCount:" + epoch		
 		pipeline.zincrby(commandCountKeyName, command, 1)		
 		commandCountKeyName = server + ":DailyCommandCount:" + currentDate		
 		pipeline.zincrby(commandCountKeyName, command, 1)		
+		
 		keyCountKeyName = server + ":KeyCount:" + epoch		
 		pipeline.zincrby(keyCountKeyName, keyname, 1)		
 		keyCountKeyName = server + ":DailyKeyCount:" + currentDate		

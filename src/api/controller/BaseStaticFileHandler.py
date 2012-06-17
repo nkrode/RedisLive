@@ -5,5 +5,5 @@ class BaseStaticFileHandler(tornado.web.StaticFileHandler):
 		return None
 
 	def get_cache_time(self, path, modified, mime_type):
-		return 20
+		return None
 
