@@ -4,14 +4,12 @@ import redis
 import re
 import dateutil.parser
 
-#from dataprovider.sqliteprovider import RedisStatsProvider
-from dataprovider.redisprovider import RedisStatsProvider
-
+from dataprovider.dataprovider import RedisLiveDataProvider
 from api.util.RDP import rdp
 
 class BaseController(tornado.web.RequestHandler):
 
-	statsProvider = RedisStatsProvider()
+	statsProvider = RedisLiveDataProvider.GetProvider()
 
 	def DateTimeToList(self, datetime):		
 		parsedDate = dateutil.parser.parse(datetime)

@@ -3,22 +3,21 @@ import tornado.web
 import random
 
 from BaseController import BaseController
-
+from api.util.settings import RedisLiveSettings
 
 class ServerListController(BaseController):
 
 	def get(self):       
 		serverList = self.ReadServerConfig()
-		servers = { "servers" : serverList}
+		servers = { "servers" : serverList }
 		self.write(servers)   
+		
 
 	def ReadServerConfig(self):
-		redisServers = []
-		f = open("config.ini")
-		for line in f:
-			if line[0]=="#":
-				continue
-			parts=line.rstrip('\r\n').split(':')		
-			redisServers.append({ "server" : parts[0], "port" : int(parts[1]) , "id" : parts[0] + ":" + parts[1]})
+		serverList = []
+		redisServers = RedisLiveSettings.GetRedisServers()	
 
-		return redisServers
+		for server in redisServers:			
+			serverList.append({ "server" : server["server"], "port" : server["port"] , "id" : server["server"] + ":" + `server["port"]` })
+
+		return serverList

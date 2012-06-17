@@ -4,16 +4,16 @@ import redis
 import json
 import ast
 
-# redis server to use to store stats
-server = "localhost"
-port = 6381
+from api.util.settings import RedisLiveSettings
 
 class RedisStatsProvider(object):
 	"A Redis based persistance to store and fetch stats"
 
 	def __init__(self):
-		self.server = server
-		self.port = port
+		# redis server to use to store stats
+		statsServer = RedisLiveSettings.GetRedisStatsServer()		
+		self.server = statsServer["server"]
+		self.port = statsServer["port"]
 		self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)	
 	
 	def SaveMemoryInfo(self, server, timestamp, used, peak):
