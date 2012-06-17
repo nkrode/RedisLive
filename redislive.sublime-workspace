@@ -207,24 +207,20 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main.py",
-			"settings":
-			{
-				"buffer_size": 1279,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 94.0,
+		"height": 72.0,
 		"selected_items":
 		[
 			[
 				"close",
 				"Project: Close"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
 			],
 			[
 				"project",
@@ -331,7 +327,7 @@
 				"Tidy HTML"
 			]
 		],
-		"width": 561.0
+		"width": 435.0
 	},
 	"console":
 	{
@@ -348,16 +344,31 @@
 	},
 	"file_history":
 	[
+		"/Users/nk/Desktop/RedisLive/src/dataprovider/redisprovider.py",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/info-widget-view.js",
+		"/Users/nk/Desktop/RedisLive/src/api/controller/MemoryController.py",
+		"/Users/nk/Desktop/RedisLive/src/api/controller/CommandsController.py",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/base-widget-view.js",
+		"/Users/nk/Desktop/RedisLive/src/api/controller/BaseStaticFileHandler.py",
+		"/Users/nk/Desktop/RedisLive/src/api/controller/BaseController.py",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/memory-widget-view.js",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/commands-widget-view.js",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/top-keys-widget-view.js",
+		"/Users/nk/Desktop/RedisLive/src/www/js/views/top-commands-widget-view.js",
 		"/Users/nk/Desktop/RedisLive/src/main.py",
-		"/Users/nk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/less/wells.less",
 		"/Users/nk/Desktop/RedisLive/src/www/index.html",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/less/widget.less",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/less/tables.less",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/less/type.less",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/bootstrap.css",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/less/bootstrap.less",
+		"/Users/nk/Desktop/RedisLive/src/www/js/libs/bootstrap/less/badges.less",
+		"/Users/nk/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/nk/Desktop/RedisLive/src/dataprovider/sqliteprovider.py",
 		"/Users/nk/Desktop/RedisLive/src/www/js/app.js",
 		"/Users/nk/Desktop/RedisLive/src/api/controller/InfoController.py",
 		"/Users/nk/Desktop/RedisLive/src/redis_monitor.py",
-		"/Users/nk/Desktop/RedisLive/src/api/controller/BaseController.py",
-		"/Users/nk/Desktop/RedisLive/src/dataprovider/redisprovider.py",
-		"/Users/nk/Desktop/RedisLive/src/www/js/views/base-widget-view.js",
 		"/Users/nk/Desktop/RedisLive/src/config.ini",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/redis_monitor.py",
 		"/Users/nk/Dropbox/RedisLive/RedisLive/src/www/js/app.js",
@@ -460,22 +471,7 @@
 		"/Library/Python/2.7/site-packages/tornado-2.2-py2.7.egg/tornado/web.py",
 		"/Users/nitin/Desktop/RedisLive/RedisLive/src/api/controller/HelloHandler.py",
 		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/app.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/info-widget-view.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/models/info-widget-model.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/index.html",
-		"/Users/nitin/:Users:nitin:Library:Application Support:Sublime Text 2:Packages:User:comment.sublime-snippet",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/templates/info-widget-template.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/models/info.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/info-widget.js",
-		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/Fetch.sublime-settings",
-		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
-		"/Users/nitin/Library/Application Support/Sublime Text 2/Packages/User/HTML.sublime-settings",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/underscore/underscore-min.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/backbone/backbone-min.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/redislive.sublime-project",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/libs/jquery/jquery-1.7.2.min.js",
-		"/Users/nitin/Desktop/RedisLive/RedisLive/home.html"
+		"/Users/nitin/Desktop/RedisLive/RedisLive/src/js/views/info-widget-view.js"
 	],
 	"find":
 	{
@@ -495,6 +491,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hr",
+			"h",
+			"hr",
 			"%s.%f",
 			"SaveMemoryInfo",
 			"raw_data",
@@ -538,37 +537,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main.py",
-					"settings":
-					{
-						"buffer_size": 1279,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1211,
-								1211
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -614,6 +584,62 @@
 		"selected_items":
 		[
 			[
+				"info-",
+				"www/js/views/info-widget-view.js"
+			],
+			[
+				"info",
+				"www/js/views/info-widget-view.js"
+			],
+			[
+				"red",
+				"dataprovider/redisprovider.py"
+			],
+			[
+				"base-w",
+				"www/js/views/base-widget-view.js"
+			],
+			[
+				"command-",
+				"www/js/views/commands-widget-view.js"
+			],
+			[
+				"top-keys",
+				"www/js/views/top-keys-widget-view.js"
+			],
+			[
+				"top",
+				"www/js/views/top-commands-widget-view.js"
+			],
+			[
+				"mem",
+				"www/js/views/memory-widget-view.js"
+			],
+			[
+				"info-w",
+				"www/js/views/info-widget-view.js"
+			],
+			[
+				"wid",
+				"www/js/libs/bootstrap/less/widget.less"
+			],
+			[
+				"wi",
+				"www/js/libs/bootstrap/less/widget.less"
+			],
+			[
+				"boot",
+				"www/js/libs/bootstrap/bootstrap.css"
+			],
+			[
+				"ind",
+				"www/index.html"
+			],
+			[
+				"badge",
+				"www/js/libs/bootstrap/less/badges.less"
+			],
+			[
 				"inde",
 				"www/index.html"
 			],
@@ -624,10 +650,6 @@
 			[
 				"ma",
 				"main.py"
-			],
-			[
-				"info",
-				"api/controller/InfoController.py"
 			],
 			[
 				"app",
@@ -710,10 +732,6 @@
 				"www/index.html"
 			],
 			[
-				"top",
-				"api/controller/TopCommandsController.py"
-			],
-			[
 				"memo",
 				"api/controller/MemoryController.py"
 			],
@@ -734,20 +752,12 @@
 				"main.py"
 			],
 			[
-				"ind",
-				"www/index.html"
-			],
-			[
 				"fill",
 				"redis_fill_data.py"
 			],
 			[
 				"moni",
 				"redis_monitor.py"
-			],
-			[
-				"mem",
-				"www/js/views/memory-widget-view.js"
 			],
 			[
 				"basew",
@@ -808,10 +818,6 @@
 			[
 				"infocon",
 				"api/controller/InfoController.py"
-			],
-			[
-				"info-w",
-				"www/js/models/info-widget-model.js"
 			],
 			[
 				"app.",
