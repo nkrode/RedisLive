@@ -1,20 +1,25 @@
 #! /usr/bin/env python
 
-import socket
+
 import datetime
-import threading
 import time
 from time import strftime
+
+import threading
+from threading import Timer
+
 import redis
 import traceback
 import datetime
+import argparse
 
 
 #from dataprovider.sqliteprovider import RedisStatsProvider
 from dataprovider.redisprovider import RedisStatsProvider
 
 
-class Monitor():
+class Monitor(object):
+
     def __init__(self, connection_pool):
         self.connection_pool = connection_pool
         self.connection = None
@@ -159,42 +164,60 @@ class InfoThread(threading.Thread):
 				print tb				
 				print "==============================\n"
 
-def main():		
+class RedisMonitor(object):
 
-	redisServers = ReadServerConfig()
+	def __init__(self):
+		self.threads = []
+		self.active = True
 
-	threads = []
+	def Run(self, duration): 
 
-	for redisServer in redisServers:
-		monitor = MonitorThread(redisServer["server"], redisServer["port"])				
-		threads.append(monitor)		
-		monitor.setDaemon(True)
-		monitor.start()
+ 		redisServers = self.ReadServerConfig()		
 
-		info = InfoThread(redisServer["server"], redisServer["port"])		
-		threads.append(info)
-		info.setDaemon(True)
-		info.start()
+		for redisServer in redisServers:
+			monitor = MonitorThread(redisServer["server"], redisServer["port"])				
+			self.threads.append(monitor)		
+			monitor.setDaemon(True)
+			monitor.start()
 
+			info = InfoThread(redisServer["server"], redisServer["port"])		
+			self.threads.append(info)
+			info.setDaemon(True)
+			info.start()
 
+		t = Timer(duration, self.Stop)
+		t.start()
 
-	try:
-		while True: 
-			pass
-	except (KeyboardInterrupt, SystemExit):
-		for t in threads:
-			t.stop()
+		try:
+			while self.active: 
+				pass
+		except (KeyboardInterrupt, SystemExit):			
+			self.Stop()
 
-def ReadServerConfig():
-	redisServers = []
-	f = open("config.ini")
-	for line in f:
-		if line[0]=="#":
-			continue
-		parts=line.rstrip('\r\n').split(':')		
-		redisServers.append({ "server" : parts[0], "port" : int(parts[1])})
+	def Stop(self):
+		print "shutting down..."
+		for t in self.threads:
+				t.stop()
+		self.active = False
 
-	return redisServers
+	def ReadServerConfig(self):
+		redisServers = []
+		f = open("config.ini")
+		for line in f:
+			if line[0]=="#":
+				continue
+			parts=line.rstrip('\r\n').split(':')		
+			redisServers.append({ "server" : parts[0], "port" : int(parts[1])})
+
+		return redisServers
+
 
 if __name__ == '__main__':
-	main()
+	parser = argparse.ArgumentParser(description='Monitor redis.')
+	parser.add_argument('--duration', type = int, help = "duration to run the monitor command (in seconds)", required = True) 
+	args = parser.parse_args()
+	duration = args.duration
+	monitor = RedisMonitor()
+	monitor.Run(duration)
+
+
