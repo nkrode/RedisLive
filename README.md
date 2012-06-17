@@ -7,8 +7,14 @@ Visualize your redis instances, analyze query patterns and spikes.
 
 Quick Start
 ------------
+**Install Dependencies**
++ [tornado](https://github.com/facebook/tornado) `pip install tornado`
++ [redis.py] (https://github.com/andymccurdy/redis-py) `pip install redis`
 
-**Clone the repo** `git clone https://github.com/kumarnitin/RedisLive.git`, or [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master).
+**Download RedisLive**
++ [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
++ Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`
+
 
 
 Caveat on monitoring redis
