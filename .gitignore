@@ -27,3 +27,5 @@ pip-log.txt
 .mr.developer.cfg
 
 .DS_Store
+
+.sublime-workspace
