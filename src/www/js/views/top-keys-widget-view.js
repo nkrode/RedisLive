@@ -32,11 +32,13 @@ var TopKeysWidget = BaseWidget.extend({
       this.dataTable.addColumn('number', 'count')
       this.dataTable.addRows(model.data)    
 
+      //https://developers.google.com/chart/interactive/docs/gallery/columnchart#Configuration_Options        
       var options = {
                       title : ''
                     , colors : [ '#008FD5', '#006B9F', '#454545', '#E70B20' ]     
-                    , chartArea: { 'left' : 30, 'top' : 20, 'width': '85%', 'height': '300' }  
-                    , height : 350                    
+                    , chartArea: { 'left' : 100, 'top' : 10, 'width': '90%', 'height': '200' } 
+                    , height : 250
+                    , animation: { duration : 500, easing : 'linear' }                    
                     , legend: { position: 'none' }                    
                    }      
 
