@@ -20,7 +20,7 @@ class CommandsController(BaseController):
     fromDate = self.get_argument("from", None)
     toDate = self.get_argument("to", None)
 
-    if fromDate==None or toDate==None:
+    if fromDate == None or toDate == None:
       end = datetime.datetime.now()
       delta = datetime.timedelta(seconds=120)
       start = end - delta
