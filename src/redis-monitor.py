@@ -1,22 +1,17 @@
 #! /usr/bin/env python
 
-
 import datetime
 import time
 from time import strftime
-
 import threading
 from threading import Timer
-
 import redis
 import traceback
 import datetime
 import argparse
 
-
-#from dataprovider.sqliteprovider import RedisStatsProvider
-from dataprovider.redisprovider import RedisStatsProvider
-
+from dataprovider.dataprovider import RedisLiveDataProvider
+from api.util.settings import RedisLiveSettings
 
 class Monitor(object):
 
@@ -65,7 +60,7 @@ class MonitorThread(threading.Thread):
 
 	def run(self):
 		
-		statsProvider = RedisStatsProvider()
+		statsProvider = RedisLiveDataProvider.GetProvider()
 		pool = redis.ConnectionPool(host=self.server, port=self.port, db=0)
 		monitor=Monitor(pool)
 		commands = monitor.monitor()
@@ -128,7 +123,7 @@ class InfoThread(threading.Thread):
 
 	def run(self):
 		
-		statsProvider = RedisStatsProvider()	
+		statsProvider = RedisLiveDataProvider.GetProvider()
 		redisClient = redis.StrictRedis(host=self.server, port=self.port, db=0)
 		
 		while not self.stopped():	
@@ -172,7 +167,7 @@ class RedisMonitor(object):
 
 	def Run(self, duration): 
 
- 		redisServers = self.ReadServerConfig()		
+ 		redisServers = RedisLiveSettings.GetRedisServers()
 
 		for redisServer in redisServers:
 			monitor = MonitorThread(redisServer["server"], redisServer["port"])				
@@ -193,6 +188,8 @@ class RedisMonitor(object):
 				pass
 		except (KeyboardInterrupt, SystemExit):			
 			self.Stop()
+			t.cancel()
+			
 
 	def Stop(self):
 		print "shutting down..."
@@ -200,16 +197,16 @@ class RedisMonitor(object):
 				t.stop()
 		self.active = False
 
-	def ReadServerConfig(self):
-		redisServers = []
-		f = open("config.ini")
-		for line in f:
-			if line[0]=="#":
-				continue
-			parts=line.rstrip('\r\n').split(':')		
-			redisServers.append({ "server" : parts[0], "port" : int(parts[1])})
+	# def ReadServerConfig(self):
+	# 	redisServers = []
+	# 	f = open("redis-live.conf")
+	# 	for line in f:
+	# 		if line[0]=="#":
+	# 			continue
+	# 		parts=line.rstrip('\r\n').split(':')		
+	# 		redisServers.append({ "server" : parts[0], "port" : int(parts[1])})
 
-		return redisServers
+	# 	return redisServers
 
 
 if __name__ == '__main__':
