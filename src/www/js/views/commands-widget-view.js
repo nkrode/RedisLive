@@ -42,16 +42,13 @@ var CommandsWidget = BaseWidget.extend({
         , options = {
                       title : ''
                     , colors: [ '#17BECF', '#9EDAE5' ]
-                    , isStacked: true
-                    , chartArea: { 'width' : '85%'}
-                    , pointSize: pointSize 
-                    , "hAxis.slantedText" : "true"
-                    , "hAxis.slantedTextAngle" : "90" 
-                    , areaOpacity : .9
+                    , areaOpacity : .9                    
+                    , pointSize: pointSize                      
+                    , chartArea: { 'top' : 10, 'width' : '85%' }
                     , width : "100%"
                     , height : 200
-                    , animation : { duration : 500, easing: 'out' }
-                    , vAxis: { minValue : 0 }                    
+                    , animation : { duration : 500, easing: 'out' } 
+                    , vAxis: { minValue : 0 }
                     }
 
       this.chart.draw(this.dataTable, options)
