@@ -15,7 +15,7 @@ Installation
 + Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`, or [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
 
 **Configuration**
-+ edit **redis-live.conf** and update the value of the key `RedisServers` to the redis instances you want to monitor
++ edit **redis-live.conf** and update the value of the key `RedisServers` to the redis instances you want to monitor. You can monitor multiple instances by appending more values to the RedisServers list.
 
 **Start RedisLive**
 + start the monitoring script `./redis-monitor.py --duration=120` duration is in seconds ([see caveat](#caveat-on-monitoring-redis))
