@@ -27,6 +27,13 @@ You'll also need argparse if you're running Python < 2.7:
 + start the webserver `./redis-live.py`
 + RedisLive is now running @ `http://localhost:8888/index.html`
 
+**Optional Configuration**
++ if you have a local redis instance, you can switch to a redis backed store to save RedisLive data (preferred and much faster)
+  + edit redis.conf provide the server and port for the redis instance you will use to store RedisLive data (this redis instance is different from the redis instances you are monitoring). Change the value of RedisStatsServer key.
+  + edit /src/dataprovider/dataprovider.py switch to redisprovider :
+      + disable line 1 `#from sqliteprovider import RedisStatsProvider`
+      + enable line 2  `from redisprovider import RedisStatsProvider`
+
 
 
 Caveat on monitoring redis
