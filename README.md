@@ -10,6 +10,11 @@ Installation
 **Install Dependencies**
 + [tornado](https://github.com/facebook/tornado) `pip install tornado`
 + [redis.py] (https://github.com/andymccurdy/redis-py) `pip install redis`
++ [python-dateutil] (http://labix.org/python-dateutil) `pip install python-dateutil`
+
+You'll also need argparse if you're running Python < 2.7:
+
++ [argparse] (http://code.google.com/p/argparse/) `pip install argparse`
 
 **Get RedisLive**
 + Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`, or [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
