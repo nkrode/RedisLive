@@ -131,7 +131,13 @@ class InfoThread(threading.Thread):
 				redisInfo = redisClient.info()		
 				currentTime = datetime.datetime.now()
 				used_memory = int(redisInfo['used_memory'])
-				peak_memory = int(redisInfo['used_memory_peak'])	
+				
+				# used_memory_peak not available in older versions of redis
+				try:
+					peak_memory = int(redisInfo['used_memory_peak'])
+				except:
+					peak_memory = used_memory
+
 				statsProvider.SaveMemoryInfo(self.id, currentTime, used_memory, peak_memory)
 				statsProvider.SaveInfoCommand(self.id, currentTime, redisInfo)	
 
