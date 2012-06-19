@@ -1,6 +1,6 @@
 var InfoWidgetModel = Backbone.Model.extend({
 
-    url: "/api/info",
+    url: "api/info",
 
     initialize: function() {        
     },
