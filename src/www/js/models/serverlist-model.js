@@ -1,6 +1,6 @@
 var ServerListModel = Backbone.Model.extend({
   
-  url : "/api/servers",
+  url : "api/servers",
 
   initialize : function(){
 
