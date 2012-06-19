@@ -20,20 +20,16 @@ You'll also need argparse if you're running Python < 2.7:
 + Clone the repo `git clone https://github.com/kumarnitin/RedisLive.git`, or [download the latest release](https://github.com/kumarnitin/RedisLive/zipball/master)
 
 **Configuration**
-+ edit **redis-live.conf** and update the value of the key `RedisServers` to the redis instances you want to monitor. You can monitor multiple instances by appending more values to the RedisServers list.
++ edit redis-live.conf :
+  + update the value of the key `RedisServers` to the redis instances you want to monitor. You can monitor multiple instances by appending more values to the RedisServers list.
+  + update the value of the key `RedisStatsServer` to the redis instance you will use to store RedisLive data (this redis instance is different from the redis instances you are monitoring).
+  
+if you don't have a spare redis instance to use to store RedisLive data, then you can configure RedisLive to use sqlite by changing to ` "DataStoreType" : "sqlite" ` 
 
 **Start RedisLive**
 + start the monitoring script `./redis-monitor.py --duration=120` duration is in seconds ([see caveat](#caveat-on-monitoring-redis))
 + start the webserver `./redis-live.py`
 + RedisLive is now running @ `http://localhost:8888/index.html`
-
-**Optional Configuration**
-+ if you have a local redis instance, you can switch to a redis backed store to save RedisLive data (preferred and much faster)
-  + edit redis.conf provide the server and port for the redis instance you will use to store RedisLive data (this redis instance is different from the redis instances you are monitoring). Change the value of RedisStatsServer key.
-  + edit /src/dataprovider/dataprovider.py switch to redisprovider :
-      + disable line 1 `#from sqliteprovider import RedisStatsProvider`
-      + enable line 2  `from redisprovider import RedisStatsProvider`
-
 
 
 Caveat on monitoring redis
@@ -57,7 +53,3 @@ License
 -------
 RedisLive is released under the MIT license:
 + www.opensource.org/licenses/MIT
-
-
-
-
