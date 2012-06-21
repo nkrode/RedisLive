@@ -49,6 +49,12 @@ Authors
 
 + http://twitter.com/nkrode
 
+Contributors
+------------
++ [bialecki](https://github.com/bialecki) (Andrew Bialecki)
++ [reustle](https://github.com/reustle) (Shane Reustle)
++ [markdube](https://github.com/markdube) (Mark Dube)
+
 License
 -------
 RedisLive is released under the MIT license:
