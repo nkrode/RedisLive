@@ -77,8 +77,12 @@ class MonitorThread(threading.Thread):
 				epoch = float(t)
 				timestamp = datetime.datetime.fromtimestamp(epoch)
 
-				command = parts[1].replace('"','').upper()
+				# Strips '(db N)' out of the monitor str to avoid breaking
+				if parts[1]=="(db":
+					parts = [parts[0]] + parts[3:]
 
+				command = parts[1].replace('"','').upper()
+					
 				if len(parts)>2:					
 					keyname = parts[2].replace('"','').strip()
 				else:
