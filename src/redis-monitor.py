@@ -77,8 +77,8 @@ class MonitorThread(threading.Thread):
 				epoch = float(t)
 				timestamp = datetime.datetime.fromtimestamp(epoch)
 
-				# Strips '(db N)' out of the monitor str to avoid breaking
-				if parts[1]=="(db":
+				# Strip '(db N)' and '[N x.x.x.x:xx]' out of the monitor str
+				if (parts[1]=="(db") or (parts[1][0] == "["):
 					parts = [parts[0]] + parts[3:]
 
 				command = parts[1].replace('"','').upper()
@@ -202,7 +202,8 @@ class RedisMonitor(object):
 			
 
 	def Stop(self):
-		print "shutting down..."
+		if args.quiet==False:
+			print "shutting down..."
 		for t in self.threads:
 				t.stop()
 		self.active = False
@@ -222,6 +223,7 @@ class RedisMonitor(object):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Monitor redis.')
 	parser.add_argument('--duration', type = int, help = "duration to run the monitor command (in seconds)", required = True) 
+	parser.add_argument('--quiet', help = "do  not write anything to standard output", required = False, action='store_true') 
 	args = parser.parse_args()
 	duration = args.duration
 	monitor = RedisMonitor()
