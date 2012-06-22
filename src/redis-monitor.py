@@ -77,8 +77,8 @@ class MonitorThread(threading.Thread):
 				epoch = float(t)
 				timestamp = datetime.datetime.fromtimestamp(epoch)
 
-				# Strips '(db N)' out of the monitor str to avoid breaking
-				if parts[1]=="(db":
+				# Strip '(db N)' and '[N x.x.x.x:xx]' out of the monitor str
+				if (parts[1]=="(db") or (parts[1][0] == "["):
 					parts = [parts[0]] + parts[3:]
 
 				command = parts[1].replace('"','').upper()
