@@ -207,18 +207,7 @@ class RedisMonitor(object):
 		for t in self.threads:
 				t.stop()
 		self.active = False
-
-	# def ReadServerConfig(self):
-	# 	redisServers = []
-	# 	f = open("redis-live.conf")
-	# 	for line in f:
-	# 		if line[0]=="#":
-	# 			continue
-	# 		parts=line.rstrip('\r\n').split(':')		
-	# 		redisServers.append({ "server" : parts[0], "port" : int(parts[1])})
-
-	# 	return redisServers
-
+		
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Monitor redis.')
