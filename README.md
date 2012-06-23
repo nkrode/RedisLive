@@ -54,6 +54,7 @@ Contributors
 + [bialecki](https://github.com/bialecki) (Andrew Bialecki)
 + [reustle](https://github.com/reustle) (Shane Reustle)
 + [markdube](https://github.com/markdube) (Mark Dube)
++ [skreuzer](https://github.com/skreuzer) (Steven Kreuzer)
 
 License
 -------
