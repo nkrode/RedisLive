@@ -56,6 +56,7 @@ Contributors
 + [reustle](https://github.com/reustle) (Shane Reustle)
 + [markdube](https://github.com/markdube) (Mark Dube)
 + [skreuzer](https://github.com/skreuzer) (Steven Kreuzer)
++ [snikch](https://github.com/snikch) (Mal Curtis)
 
 License
 -------
