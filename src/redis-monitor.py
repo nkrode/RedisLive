@@ -45,10 +45,11 @@ class Monitor(object):
 
 class MonitorThread(threading.Thread):
 
-	def __init__(self, server, port):
+	def __init__(self, server, port, password=None):
 		threading.Thread.__init__(self)
 		self.server = server
 		self.port = port
+		self.password = password
 		self.id = self.server + ":" + str(self.port)
 		self._stop = threading.Event()		
 
@@ -61,7 +62,7 @@ class MonitorThread(threading.Thread):
 	def run(self):
 		
 		statsProvider = RedisLiveDataProvider.GetProvider()
-		pool = redis.ConnectionPool(host=self.server, port=self.port, db=0)
+		pool = redis.ConnectionPool(host=self.server, port=self.port, db=0, password=self.password)
 		monitor=Monitor(pool)
 		commands = monitor.monitor()
 		
@@ -112,10 +113,11 @@ class MonitorThread(threading.Thread):
 
 class InfoThread(threading.Thread):
 
-	def __init__(self, server, port):
+	def __init__(self, server, port, password=None):
 		threading.Thread.__init__(self)
 		self.server = server
 		self.port = port
+		self.password = password
 		self.id = self.server + ":" + str(self.port)
 		self._stop = threading.Event()		
 
@@ -128,7 +130,7 @@ class InfoThread(threading.Thread):
 	def run(self):
 		
 		statsProvider = RedisLiveDataProvider.GetProvider()
-		redisClient = redis.StrictRedis(host=self.server, port=self.port, db=0)
+		redisClient = redis.StrictRedis(host=self.server, port=self.port, db=0, password=self.password)
 		
 		while not self.stopped():	
 			try:		
@@ -180,12 +182,12 @@ class RedisMonitor(object):
  		redisServers = RedisLiveSettings.GetRedisServers()
 
 		for redisServer in redisServers:
-			monitor = MonitorThread(redisServer["server"], redisServer["port"])				
+			monitor = MonitorThread(redisServer["server"], redisServer["port"], redisServer.get("password", None))				
 			self.threads.append(monitor)		
 			monitor.setDaemon(True)
 			monitor.start()
 
-			info = InfoThread(redisServer["server"], redisServer["port"])		
+			info = InfoThread(redisServer["server"], redisServer["port"], redisServer.get("password", None))		
 			self.threads.append(info)
 			info.setDaemon(True)
 			info.start()
