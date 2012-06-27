@@ -1,7 +1,7 @@
 RedisLive
 ---------
 
-Visualize your redis instances, analyze query patterns and spikes. 
+Visualize your redis instances, analyze query patterns and spikes.
 
 ![Redis Live](https://github.com/kumarnitin/RedisLive/blob/master/design/redis-live.png?raw=true "Redis Live")
 
@@ -23,8 +23,9 @@ You'll also need argparse if you're running Python < 2.7:
 + edit redis-live.conf :
   + update the value of the key `RedisServers` to the redis instances you want to monitor. You can monitor multiple instances by appending more values to the RedisServers list.
   + update the value of the key `RedisStatsServer` to the redis instance you will use to store RedisLive data (this redis instance is different from the redis instances you are monitoring).
-  
-if you don't have a spare redis instance to use to store RedisLive data, then you can configure RedisLive to use sqlite by changing to ` "DataStoreType" : "sqlite" ` 
+  + passwords can be added as an optional parameter for any redis instance
+
+if you don't have a spare redis instance to use to store RedisLive data, then you can configure RedisLive to use sqlite by changing to ` "DataStoreType" : "sqlite" `
 
 **Start RedisLive**
 + start the monitoring script `./redis-monitor.py --duration=120` duration is in seconds ([see caveat](#caveat-on-monitoring-redis))
