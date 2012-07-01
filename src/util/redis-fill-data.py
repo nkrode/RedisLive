@@ -10,7 +10,7 @@ def monitor():
 	redisPort = 6379
 	redisClient = redis.StrictRedis(host=redisHost, port=redisPort, db=0)	
 	
-	for x in xrange(1,10000):	
+	while True:
 
 		x = random.randint(1, 100)
 		y = random.randint(1, 20)
@@ -41,12 +41,6 @@ def monitor():
 				redisClient.expire("Key:"+ `x`, 2000)
 		elif y==11:
 			redisClient.flushall()
-			
-			
-
-		time.sleep(0.1)
-
-		
 		
 
 
