@@ -15,12 +15,12 @@ from api.controller.TopKeysController import TopKeysController
 
 # Bootup
 application = tornado.web.Application([
-  (r"/api/servers", ServerListController), 
+  (r"/api/servers", ServerListController),
   (r"/api/info", InfoController),
-  (r"/api/memory", MemoryController),   
-  (r"/api/commands", CommandsController), 
-  (r"/api/topcommands", TopCommandsController), 
-  (r"/api/topkeys", TopKeysController), 
+  (r"/api/memory", MemoryController),
+  (r"/api/commands", CommandsController),
+  (r"/api/topcommands", TopCommandsController),
+  (r"/api/topkeys", TopKeysController),
   (r"/(.*)", BaseStaticFileHandler, {"path": "www"})
 ], debug="True")
 
