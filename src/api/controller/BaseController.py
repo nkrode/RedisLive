@@ -1,109 +1,117 @@
 import tornado.ioloop
 import tornado.web
-import redis
-import re
 import dateutil.parser
 
 from dataprovider.dataprovider import RedisLiveDataProvider
-from api.util.RDP import rdp
 
 class BaseController(tornado.web.RequestHandler):
 
-	statsProvider = RedisLiveDataProvider.GetProvider()
+    statsProvider = RedisLiveDataProvider.GetProvider()
 
-	def DateTimeToList(self, datetime):		
-		parsedDate = dateutil.parser.parse(datetime)
-		return [ parsedDate.year, parsedDate.month, parsedDate.day, parsedDate.hour, parsedDate.minute, parsedDate.second ]
+    def DateTimeToList(self, datetime):
+        """Converts a datetime to a list.
 
-	# todo : fix this
-  	def AverageData(self,data):  		
-  		average = []
+        Args:
+            datetime (datetime): The datetime to convert.
+        """
+        parsed_date = dateutil.parser.parse(datetime)
+        # don't return the last two fields, we don't want them.
+        return tuple(parsed_date.timetuple())[:-2]
 
-  		deviation=1024*1024
-  		
-  		start = dateutil.parser.parse(data[0][0])
-  		end   = dateutil.parser.parse(data[-1][0])
-  		difference = end - start
-  		weeks, days = divmod(difference.days, 7)
-  		minutes, seconds = divmod(difference.seconds, 60)
-		hours, minutes = divmod(minutes, 60)
+    # todo : fix this
+    def AverageData(self, data):
+        """Averages data.
 
-		if difference.days > 0:
-			current_max=0
-			current_current=0
-			current_d = 0		
-			for dt,maxMemory,currentMemory in data:						
-				d = dateutil.parser.parse(dt)
-				if d.day!=current_d:
-					current_d=d.day				
-					average.append([dt,maxMemory,currentMemory])
-					current_max=maxMemory
-					current_current=currentMemory
-				else:
-					if maxMemory>current_max or currentMemory>current_current:
-						average.pop()
-						average.append([dt,maxMemory,currentMemory])
-						current_max=maxMemory
-						current_current=currentMemory
-		elif hours > 0:
-			current_max=0
-			current_current=0
-			current = -1	
-			keep_flag = False	
-			for dt,maxMemory,currentMemory in data:						
-				d = dateutil.parser.parse(dt)
-				if d.hour!=current:
-					current=d.hour				
-					average.append([dt,maxMemory,currentMemory])
-					current_max=maxMemory
-					current_current=currentMemory
-					keep_flag=False
-				elif abs(maxMemory-current_max)>deviation  or abs(currentMemory-current_current)>deviation :
-						#average.pop()
-						average.append([dt,maxMemory,currentMemory])
-						current_max=maxMemory
-						current_current=currentMemory
-						keep_flag=True
-				elif maxMemory>current_max or currentMemory>current_current :
-						if keep_flag!=True:
-							average.pop()
-						average.append([dt,maxMemory,currentMemory])
-						current_max=maxMemory
-						current_current=currentMemory
-						keep_flag=False
-		else:
-			current_max=0
-			current_current=0
-			current_m = -1	
-			keep_flag = False	
-			for dt,maxMemory,currentMemory in data:						
-				d = dateutil.parser.parse(dt)
-				if d.minute!=current_m:
-					current_m=d.minute				
-					average.append([dt,maxMemory,currentMemory])
-					current_max=maxMemory
-					current_current=currentMemory
-					keep_flag=False
-				elif abs(maxMemory-current_max)>deviation  or abs(currentMemory-current_current)>deviation :
-						#average.pop()
-						average.append([dt,maxMemory,currentMemory])
-						current_max=maxMemory
-						current_current=currentMemory
-						keep_flag=True
-				elif maxMemory>current_max or currentMemory>current_current :
-						if keep_flag!=True:
-							average.pop()
-						average.append([dt,maxMemory,currentMemory])
-						current_max=maxMemory
-						current_current=currentMemory
-						keep_flag=False
+        TODO: More docstring here, once functionality is understood.
+        """
+        average = []
 
+        deviation=1024*1024
 
+        start = dateutil.parser.parse(data[0][0])
+        end = dateutil.parser.parse(data[-1][0])
+        difference = end - start
+        weeks, days = divmod(difference.days, 7)
+        minutes, seconds = divmod(difference.seconds, 60)
+        hours, minutes = divmod(minutes, 60)
 
-  		return average
+        # TODO: These if/elif/else branches chould probably be broken out into
+        # individual functions to make it easier to follow what's going on.
+        if difference.days > 0:
+            current_max = 0
+            current_current = 0
+            current_d = 0
 
-  
+            for dt, max_memory, current_memory in data:
+                d = dateutil.parser.parse(dt)
+                if d.day != current_d:
+                    current_d = d.day
+                    average.append([dt, max_memory, current_memory])
+                    current_max = max_memory
+                    current_current = current_memory
+                else:
+                    if max_memory > current_max or \
+                       current_memory > current_current:
+                        average.pop()
+                        average.append([dt, max_memory, current_memory])
+                        current_max=max_memory
+                        current_current=current_memory
+        elif hours > 0:
+            current_max = 0
+            current_current = 0
+            current = -1
+            keep_flag = False
 
+            for dt, max_memory, current_memory in data:
+                d = dateutil.parser.parse(dt)
+                if d.hour != current:
+                    current = d.hour
+                    average.append([dt, max_memory, current_memory])
+                    current_max=max_memory
+                    current_current=current_memory
+                    keep_flag=False
+                elif abs(max_memory - current_max) > deviation or \
+                     abs(current_memory - current_current) > deviation:
+                    #average.pop()
+                    average.append([dt, max_memory, current_memory])
+                    current_max = max_memory
+                    current_current = current_memory
+                    keep_flag = True
+                elif max_memory > current_max or \
+                     current_memory > current_current:
+                    if keep_flag != True:
+                        average.pop()
+                    average.append([dt, max_memory, current_memory])
+                    current_max = max_memory
+                    current_current = current_memory
+                    keep_flag = False
+        else:
+            current_max = 0
+            current_current = 0
+            current_m = -1
+            keep_flag = False
+            for dt, max_memory, current_memory in data:
+                d = dateutil.parser.parse(dt)
+                if d.minute != current_m:
+                    current_m = d.minute
+                    average.append([dt, max_memory, current_memory])
+                    current_max = max_memory
+                    current_current = current_memory
+                    keep_flag = False
+                elif abs(max_memory - current_max) > deviation or \
+                     abs(current_memory - current_current) > deviation:
+                    #average.pop()
+                    average.append([dt, max_memory, current_memory])
+                    current_max = max_memory
+                    current_current = current_memory
+                    keep_flag = True
+                elif max_memory > current_max or \
+                    current_memory > current_current:
+                    if keep_flag!=True:
+                        average.pop()
+                    average.append([dt,max_memory,current_memory])
+                    current_max=max_memory
+                    current_current=current_memory
+                    keep_flag=False
 
-
-	
+        return average
