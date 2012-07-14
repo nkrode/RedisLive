@@ -8,19 +8,21 @@ from datetime import datetime
 class CommandsController(BaseController):
 
     def get(self):
+        """Serves a GET request.
+        """
         return_data = dict(data=[], timestamp=datetime.now().isoformat())
 
         server = self.get_argument("server")
-        fromDate = self.get_argument("from", None)
-        toDate = self.get_argument("to", None)
+        from_date = self.get_argument("from", None)
+        to_date = self.get_argument("to", None)
 
-        if fromDate == None or toDate == None:
+        if from_date == None or to_date == None:
             end = datetime.datetime.now()
             delta = datetime.timedelta(seconds=120)
             start = end - delta
         else:
-            start = dateutil.parser.parse(fromDate)
-            end = dateutil.parser.parse(toDate)
+            start = dateutil.parser.parse(from_date)
+            end = dateutil.parser.parse(to_date)
 
         difference = end - start
         # added to support python version < 2.7, otherwise timedelta has
