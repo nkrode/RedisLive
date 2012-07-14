@@ -1,14 +1,14 @@
+from dataprovider.dataprovider import RedisLiveDataProvider
 import tornado.ioloop
 import tornado.web
 import dateutil.parser
 
-from dataprovider.dataprovider import RedisLiveDataProvider
 
 class BaseController(tornado.web.RequestHandler):
 
     statsProvider = RedisLiveDataProvider.GetProvider()
 
-    def DateTimeToList(self, datetime):
+    def datetime_to_list(self, datetime):
         """Converts a datetime to a list.
 
         Args:
@@ -19,7 +19,7 @@ class BaseController(tornado.web.RequestHandler):
         return tuple(parsed_date.timetuple())[:-2]
 
     # todo : fix this
-    def AverageData(self, data):
+    def average_data(self, data):
         """Averages data.
 
         TODO: More docstring here, once functionality is understood.
