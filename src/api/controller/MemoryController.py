@@ -1,16 +1,13 @@
+from BaseController import BaseController
 import tornado.ioloop
 import tornado.web
-import random
 import dateutil.parser
 import datetime
-
-from BaseController import BaseController
 
 
 class MemoryController(BaseController):
 
     def get(self):
-
         server = self.get_argument("server")
         from_date = self.get_argument("from", None)
         to_date = self.get_argument("to", None)
