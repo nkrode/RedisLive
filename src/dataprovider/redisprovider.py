@@ -15,7 +15,7 @@ class RedisStatsProvider(object):
         self.port = stats_server["port"]
         self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)
 
-    def SaveMemoryInfo(self, server, timestamp, used, peak):
+    def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
 
         Args:
@@ -27,9 +27,9 @@ class RedisStatsProvider(object):
         data = {"timestamp": timestamp.strftime('%s'),
                 "used": used,
                 "peak": peak}
-        self.conn.zadd(server+":memory", timestamp.strftime('%s'), data )
+        self.conn.zadd(server + ":memory", timestamp.strftime('%s'), data)
 
-    def SaveInfoCommand(self, server, timestamp, info):
+    def save_info_command(self, server, timestamp, info):
         """Save Redis info command dump
 
         Args:
@@ -39,7 +39,8 @@ class RedisStatsProvider(object):
         """
         self.conn.set(server + ":Info", json.dumps(info))
 
-    def SaveMonitorCommand(self, server, timestamp, command, keyname, argument):
+    def save_monitor_command(self, server, timestamp, command, keyname,
+                             argument):
         """save information about every command
 
         Args:
@@ -60,36 +61,40 @@ class RedisStatsProvider(object):
         # top N are easily available from sorted set in redis
         # also keep a sorted set for every day
         # switch to daily stats when stats requsted are for a longer time period        
-        command_count_key_name = server + ":CommandCount:" + epoch
-        pipeline.zincrby(command_count_key_name, command, 1)
-        command_count_key_name = server + ":DailyCommandCount:" + current_date
-        pipeline.zincrby(command_count_key_name, command, 1)
 
-        keyCountKeyName = server + ":KeyCount:" + epoch
-        pipeline.zincrby(keyCountKeyName, keyname, 1)
-        keyCountKeyName = server + ":DailyKeyCount:" + current_date
-        pipeline.zincrby(keyCountKeyName, command, 1)
+        command_count_key = server + ":CommandCount:" + epoch
+        pipeline.zincrby(command_count_key, command, 1)
+
+        command_count_key = server + ":DailyCommandCount:" + current_date
+        pipeline.zincrby(command_count_key, command, 1)
+
+        key_count_key = server + ":KeyCount:" + epoch
+        pipeline.zincrby(key_count_key, keyname, 1)
+
+        key_count_key = server + ":DailyKeyCount:" + current_date
+        pipeline.zincrby(key_count_key, command, 1)
 
         # keep aggregate command in a hash
-        command_count_key_name = server + ":CommandCountBySecond"
-        pipeline.hincrby(command_count_key_name, epoch, 1)
+        command_count_key = server + ":CommandCountBySecond"
+        pipeline.hincrby(command_count_key, epoch, 1)
 
-        command_count_key_name = server + ":CommandCountByMinute"
-        field_name = current_date + ":" + str(timestamp.hour) + ":" + str(timestamp.minute)
-        pipeline.hincrby(command_count_key_name, field_name, 1)
+        command_count_key = server + ":CommandCountByMinute"
+        field_name = current_date + ":" + str(timestamp.hour) + ":"
+        field_name += str(timestamp.minute)
+        pipeline.hincrby(command_count_key, field_name, 1)
 
-        command_count_key_name = server + ":CommandCountByHour"
+        command_count_key = server + ":CommandCountByHour"
         field_name = current_date + ":" + str(timestamp.hour)
-        pipeline.hincrby(command_count_key_name, field_name, 1)
+        pipeline.hincrby(command_count_key, field_name, 1)
 
-        command_count_key_name = server + ":CommandCountByDay"
+        command_count_key = server + ":CommandCountByDay"
         field_name = current_date
-        pipeline.hincrby(command_count_key_name, field_name, 1)
+        pipeline.hincrby(command_count_key, field_name, 1)
 
         # commit transaction to redis
         pipeline.execute()
 
-    def GetInfo(self, server):
+    def get_info(self, server):
         """Get info about the server
 
         Args:
@@ -99,7 +104,7 @@ class RedisStatsProvider(object):
         info = json.loads(info)
         return info
 
-    def GetMemoryInfo(self, server, from_date, to_date):
+    def get_memory_info(self, server, from_date, to_date):
         """Get stats for Memory Consumption between a range of dates
 
         Args:
@@ -127,7 +132,7 @@ class RedisStatsProvider(object):
 
         return memory_data
 
-    def GetCommandStats(self, server, from_date, to_date, group_by):
+    def get_command_stats(self, server, from_date, to_date, group_by):
         """Get total commands processed in the given time period
 
         Args:
@@ -204,7 +209,7 @@ class RedisStatsProvider(object):
             data.append([count, timestamp])
         return reversed(data)
 
-    def GetTopCommandsStats(self, server, from_date, to_date):
+    def get_top_commands_stats(self, server, from_date, to_date):
         """Get top commands processed in the given time period
 
         Args:
@@ -212,10 +217,12 @@ class RedisStatsProvider(object):
             from_date (datetime): Get stats from this date.
             to_date (datetime): Get stats to this date.
         """
-        return reversed(self.GetTopCounts(server, from_date, to_date,
-                                          "CommandCount", "DailyCommandCount"))
 
-    def GetTopKeysStats(self, server, from_date, to_date):
+        counts = self.get_top_counts(server, from_date, to_date, "CommandCount",
+                                     "DailyCommandCount")
+        return reversed(counts)
+
+    def get_top_keys_stats(self, server, from_date, to_date):
         """Gets top comm processed
 
         Args:
@@ -223,13 +230,13 @@ class RedisStatsProvider(object):
             from_date (datetime): Get stats from this date.
             to_date (datetime): Get stats to this date.
         """
-        return self.GetTopCounts(server, from_date, to_date, "KeyCount",
-                                 "DailyKeyCount")
+        return self.get_top_counts(server, from_date, to_date, "KeyCount",
+                                   "DailyKeyCount")
 
 
     # Helper methods
-    def GetTopCounts(self, server, from_date, to_date, seconds_key_name,
-                     day_key_name, result_count=None):
+    def get_top_counts(self, server, from_date, to_date, seconds_key_name,
+                       day_key_name, result_count=None):
         """Top counts are stored in a sorted set for every second and for every
         day. ZUNIONSTORE across the timeperiods generates the results.
 
