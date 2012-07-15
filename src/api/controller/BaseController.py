@@ -6,7 +6,7 @@ import dateutil.parser
 
 class BaseController(tornado.web.RequestHandler):
 
-    statsProvider = RedisLiveDataProvider.GetProvider()
+    stats_provider = RedisLiveDataProvider.get_provider()
 
     def datetime_to_list(self, datetime):
         """Converts a datetime to a list.

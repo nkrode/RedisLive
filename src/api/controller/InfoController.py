@@ -10,7 +10,7 @@ class InfoController(BaseController):
         """Serves a GET request.
         """
         server = self.get_argument("server")
-        redis_info = self.statsProvider.GetInfo(server)
+        redis_info = self.stats_provider.get_info(server)
         databases=[]
 
         for key in sorted(redis_info.keys()):
@@ -27,7 +27,7 @@ class InfoController(BaseController):
             databases=[{"name" : "db0", "keys" : "0", "expires" : "0"}]
 
         redis_info['databases'] = databases
-        redis_info['total_keys']= self.ShortenNumber(total_keys)
+        redis_info['total_keys']= self.shorten_number(total_keys)
 
         uptime_seconds = redis_info['uptime_in_seconds']
         redis_info['uptime'] = self.shorten_time(uptime_seconds)
