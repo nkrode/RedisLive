@@ -1,36 +1,28 @@
+from BaseController import BaseController
 import tornado.ioloop
 import tornado.web
-import random
 import dateutil.parser
 import datetime
-from dateutil.relativedelta import relativedelta
-
-
-from BaseController import BaseController
 
 
 class TopKeysController(BaseController):
 
   def get(self):
-    
-    returnData = { 
-                    "data" :  [] 
-                  , "timestamp" : datetime.datetime.now().isoformat()
-                  }
+      return_data = dict(data=[], timestamp=datetime.datetime.now().isoformat())
 
-    server = self.get_argument("server")
-    fromDate = self.get_argument("from", None)
-    toDate = self.get_argument("to", None)
+      server = self.get_argument("server")
+      from_date = self.get_argument("from", None)
+      to_date = self.get_argument("to", None)
 
-    if fromDate==None or toDate==None:
-      end = datetime.datetime.now()
-      delta = datetime.timedelta(seconds=120)
-      start = end - delta  
-    else:
-      start = dateutil.parser.parse(fromDate)
-      end   = dateutil.parser.parse(toDate)  
+      if from_date==None or to_date==None:
+          end = datetime.datetime.now()
+          delta = datetime.timedelta(seconds=120)
+          start = end - delta
+      else:
+          start = dateutil.parser.parse(from_date)
+          end   = dateutil.parser.parse(to_date)
 
-    for data in self.statsProvider.GetTopKeysStats(server, start, end):
-      returnData['data'].append([data[0], data[1]])
+      for data in self.statsProvider.GetTopKeysStats(server, start, end):
+          return_data['data'].append([data[0], data[1]])
 
-    self.write(returnData)
+      self.write(return_data)
