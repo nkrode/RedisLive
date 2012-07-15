@@ -29,7 +29,7 @@ class MemoryController(BaseController):
         prev_current=0
         counter=0
 
-        for data in self.statsProvider.GetMemoryInfo(server, start, end):
+        for data in self.stats_provider.get_memory_info(server, start, end):
             combined_data.append([data[0], data[1], data[2]])
 
         for data in combined_data:
