@@ -8,7 +8,8 @@ import datetime
 class TopCommandsController(BaseController):
 
     def get(self):
-        return_data = dict(data=[], timestamp=datetime.datetime.now.isoformat())
+        return_data = dict(data=[],
+                           timestamp=datetime.datetime.now().isoformat())
 
         server = self.get_argument("server")
         from_date = self.get_argument("from", None)
