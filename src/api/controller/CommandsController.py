@@ -2,7 +2,7 @@ from BaseController import BaseController
 import tornado.ioloop
 import tornado.web
 import dateutil.parser
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class CommandsController(BaseController):
@@ -17,8 +17,8 @@ class CommandsController(BaseController):
         to_date = self.get_argument("to", None)
 
         if from_date == None or to_date == None:
-            end = datetime.datetime.now()
-            delta = datetime.timedelta(seconds=120)
+            end = datetime.now()
+            delta = timedelta(seconds=120)
             start = end - delta
         else:
             start = dateutil.parser.parse(from_date)

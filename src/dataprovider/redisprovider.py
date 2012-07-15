@@ -101,6 +101,8 @@ class RedisStatsProvider(object):
             server (str): The server ID
         """
         info = self.conn.get(server + ":Info")
+        # FIXME: If the collector has never been run we get a 500 here. `None`
+        # is not a valid type to pass to json.loads.
         info = json.loads(info)
         return info
 
@@ -196,8 +198,9 @@ class RedisStatsProvider(object):
                 time_fmt = '%Y-%m-%d %H:%M:00'
 
             # get the count.
-            count = counts.get(x, None)
-            if count is None:
+            try:
+                count = counts[x]
+            except IndexError as e:
                 count = 0
 
             # convert the timestamp
