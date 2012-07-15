@@ -1,23 +1,22 @@
-import tornado.ioloop
-import tornado.web
-import random
-
 from BaseController import BaseController
-from api.util.settings import RedisLiveSettings
+from api.util import settings
 
 class ServerListController(BaseController):
 
-	def get(self):       
-		serverList = self.ReadServerConfig()
-		servers = { "servers" : serverList }
-		self.write(servers)   
-		
+    def get(self):
+        servers = {"servers": self.read_server_config()}
+        self.write(servers)
 
-	def ReadServerConfig(self):
-		serverList = []
-		redisServers = RedisLiveSettings.GetRedisServers()	
+    def read_server_config(self):
+        """Returns a list of servers with the 'id' field added.
+        """
+        # TODO: Move this into the settings module so everything benefits.
+        server_list = []
+        redis_servers = settings.get_redis_servers()
 
-		for server in redisServers:			
-			serverList.append({ "server" : server["server"], "port" : server["port"] , "id" : server["server"] + ":" + `server["port"]` })
+        for server in redis_servers:
+            server_id = "%(server)s:%(port)s" % server
+            s = dict(server=server['server'], port=server['port'], id=server_id)
+            server_list.append(s)
 
-		return serverList
+        return server_list

@@ -1,55 +1,56 @@
+from BaseController import BaseController
 import tornado.ioloop
 import tornado.web
-import random
 import dateutil.parser
-import datetime
-
-from BaseController import BaseController
+from datetime import datetime, timedelta
 
 
 class CommandsController(BaseController):
 
-  def get(self):
+    def get(self):
+        """Serves a GET request.
+        """
+        return_data = dict(data=[], timestamp=datetime.now().isoformat())
 
-    returnData = { 
-                    "data" :  [] 
-                  , "timestamp" : datetime.datetime.now().isoformat()
-                  }
+        server = self.get_argument("server")
+        from_date = self.get_argument("from", None)
+        to_date = self.get_argument("to", None)
 
-    server = self.get_argument("server")
-    fromDate = self.get_argument("from", None)
-    toDate = self.get_argument("to", None)
+        if from_date == None or to_date == None:
+            end = datetime.now()
+            delta = timedelta(seconds=120)
+            start = end - delta
+        else:
+            start = dateutil.parser.parse(from_date)
+            end = dateutil.parser.parse(to_date)
 
-    if fromDate == None or toDate == None:
-      end = datetime.datetime.now()
-      delta = datetime.timedelta(seconds=120)
-      start = end - delta
-    else:
-      start = dateutil.parser.parse(fromDate)
-      end   = dateutil.parser.parse(toDate)
+        difference = end - start
+        # added to support python version < 2.7, otherwise timedelta has
+        # total_seconds()
+        difference_total_seconds = difference.days * 24 * 3600
+        difference_total_seconds += difference.seconds
+        difference_total_seconds += difference.microseconds / 1e6
 
-    difference = end - start
-    # added to support python version < 2.7, otherwise timedelta has total_seconds()
-    differenceTotalSeconds = (difference.microseconds + (difference.seconds + difference.days*24*3600) * 1e6) / 1e6
+        minutes = difference_total_seconds / 60
+        hours = minutes / 60
+        seconds = difference_total_seconds
 
-    minutes = differenceTotalSeconds / 60
-    hours = minutes / 60
-    seconds = differenceTotalSeconds
+        if hours > 120:
+          group_by = "day"
+        elif minutes > 120:
+          group_by = "hour"
+        elif seconds > 120:
+          group_by = "minute"
+        else:
+          group_by = "second"
 
-    if hours > 120:
-      groupBy = "day"
-    elif minutes > 120 :        
-      groupBy = "hour"              
-    elif seconds > 120:
-      groupBy = "minute"      
-    else:
-      groupBy = "second"
+        combined_data = []
+        stats = self.stats_provider.get_command_stats(server, start, end,
+                                                      group_by)
+        for data in stats:
+            combined_data.append([data[1], data[0]])
 
-    combinedData = []      
-    for data in self.statsProvider.GetCommandStats(server, start, end, groupBy):                  
-        combinedData.append([ data[1], data[0]])   
+        for data in combined_data:
+            return_data['data'].append([self.datetime_to_list(data[0]), data[1]])
 
-    for data in combinedData:
-      returnData['data'].append([ self.DateTimeToList(data[0]), data[1]])
-
-    self.write(returnData)     
+        self.write(return_data)

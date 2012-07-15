@@ -1,23 +1,19 @@
 import json
 
-class RedisLiveSettings(object):
+def get_settings():
+    """Parses the settings from redis-live.conf.
+    """
+    # TODO: Consider YAML. Human writable, machine readable.
+    return json.load(open("redis-live.conf"))
 
-	@staticmethod
-	def GetRedisServers():		
-		config = RedisLiveSettings.GetSettings()
-		return config["RedisServers"]				
+def get_redis_servers():
+    config = get_settings()
+    return config["RedisServers"]
 
-	@staticmethod
-	def GetRedisStatsServer():
-		config = RedisLiveSettings.GetSettings()
-		return config["RedisStatsServer"]
+def get_redis_stats_server():
+    config = get_settings()
+    return config["RedisStatsServer"]
 
-	@staticmethod
-	def GetSettings():
-		config = open("redis-live.conf")
-		return json.loads(config.read())
-
-	@staticmethod
-	def GetDataStoreType():
-		config = RedisLiveSettings.GetSettings()
-		return config["DataStoreType"]
+def get_data_store_type():
+    config = get_settings()
+    return config["DataStoreType"]

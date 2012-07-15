@@ -1,45 +1,40 @@
+from BaseController import BaseController
 import tornado.ioloop
 import tornado.web
-import random
 import dateutil.parser
 import datetime
-
-from BaseController import BaseController
 
 
 class MemoryController(BaseController):
 
-  def get(self):
+    def get(self):
+        server = self.get_argument("server")
+        from_date = self.get_argument("from", None)
+        to_date = self.get_argument("to", None)
 
-    server = self.get_argument("server")
-    fromDate = self.get_argument("from", None)
-    toDate = self.get_argument("to", None)
-    
-    returnData = { 
-                    "data" :  [] 
-                  , "timestamp" : datetime.datetime.now().isoformat()
-                  }
+        return_data = dict(data=[],
+                           timestamp=datetime.datetime.now().isoformat())
 
-    if fromDate==None or toDate==None:                   
-      end = datetime.datetime.now()
-      delta = datetime.timedelta(seconds=60)
-      start = end - delta
-    else:
-      start = dateutil.parser.parse(fromDate)
-      end   = dateutil.parser.parse(toDate)
+        if from_date==None or to_date==None:
+            end = datetime.datetime.now()
+            delta = datetime.timedelta(seconds=60)
+            start = end - delta
+        else:
+            start = dateutil.parser.parse(from_date)
+            end   = dateutil.parser.parse(to_date)
 
-    combinedData = []
-    prevMax=0
-    prevCurrent=0
-    counter=0
-    
-    for data in self.statsProvider.GetMemoryInfo(server, start, end):
-      combinedData.append([ data[0], data[1], data[2]])
+        combined_data = []
+        # TODO: These variables aren't currently used; should they be removed?
+        prev_max=0
+        prev_current=0
+        counter=0
 
-    for data in combinedData:
-      returnData['data'].append([ self.DateTimeToList(data[0]), data[1], data[2]])
+        for data in self.stats_provider.get_memory_info(server, start, end):
+            combined_data.append([data[0], data[1], data[2]])
 
-    self.write(returnData)
+        for data in combined_data:
+            d = [self.datetime_to_list(data[0]), data[1], data[2]]
+            return_data['data'].append(d)
 
-
+        self.write(return_data)
 
