@@ -199,8 +199,11 @@ class RedisStatsProvider(object):
 
             # get the count.
             try:
-                count = counts[x]
-            except IndexError as e:
+                if counts[x] is not None: 
+                    count = int(counts[x])
+                else:
+                    count = 0
+            except Exception as e:
                 count = 0
 
             # convert the timestamp
