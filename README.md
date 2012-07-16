@@ -52,6 +52,7 @@ Authors
 
 Contributors
 ------------
++ [splee](https://github.com/splee) (Lee McFadden)
 + [bialecki](https://github.com/bialecki) (Andrew Bialecki)
 + [reustle](https://github.com/reustle) (Shane Reustle)
 + [markdube](https://github.com/markdube) (Mark Dube)
