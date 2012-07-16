@@ -31,7 +31,7 @@ class RedisStatsProvider(object):
             timestamp (datetime): Timestamp.
             info (dict): The result of a Redis INFO command.
         """
-        query = "INSERT INTO info VALUES (?, ?, ?, ?);"
+        query = "INSERT INTO info VALUES (?, ?, ?);"
         values = (timestamp.strftime('%Y-%m-%d %H:%M:%S'), json.dumps(info),
                   server)
         self._retry_query(query, values)
@@ -66,11 +66,11 @@ class RedisStatsProvider(object):
         Args:
             server (str): The server ID
         """
-        info = {}
         with contextlib.closing(self.conn.cursor()) as c:
             query = "SELECT info FROM info WHERE server=?"
             query += "ORDER BY datetime DESC LIMIT 1;"
-            return json.loads(c.execute(query, (server,))[0][0])
+            for r in c.execute(query, (server,)):
+                return(json.loads(r[0]))
 
     def get_memory_info(self, server, from_date, to_date):
         """Get stats for Memory Consumption between a range of dates

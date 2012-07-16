@@ -94,7 +94,7 @@ class MonitorThread(threading.Thread):
     def run(self):
         """Runs the thread.
         """
-        stats_provider = RedisLiveDataProvider.GetProvider()
+        stats_provider = RedisLiveDataProvider.get_provider()
         pool = redis.ConnectionPool(host=self.server, port=self.port, db=0,
                                     password=self.password)
         monitor = Monitor(pool)
@@ -132,11 +132,11 @@ class MonitorThread(threading.Thread):
                     arguments = None
 
                 if not command == 'INFO' and not command == 'MONITOR':
-                    stats_provider.SaveMonitorCommand(self.id,
-                                                     timestamp,
-                                                     command,
-                                                     str(keyname),
-                                                     str(arguments))
+                    stats_provider.save_monitor_command(self.id, 
+                                                        timestamp, 
+                                                        command, 
+                                                        str(keyname), 
+                                                        str(arguments))
 
             except Exception, e:
                 tb = traceback.format_exc()
@@ -185,7 +185,7 @@ class InfoThread(threading.Thread):
     def run(self):
         """Does all the work.
         """
-        stats_provider = RedisLiveDataProvider.GetProvider()
+        stats_provider = RedisLiveDataProvider.get_provider()
         redis_client = redis.StrictRedis(host=self.server, port=self.port, db=0,
                                         password=self.password)
 
@@ -202,9 +202,10 @@ class InfoThread(threading.Thread):
                 except:
                     peak_memory = used_memory
 
-                stats_provider.SaveMemoryInfo(self.id, current_time, used_memory,
-                                             peak_memory)
-                stats_provider.SaveInfoCommand(self.id, current_time, redis_info)
+                stats_provider.save_memory_info(self.id, current_time, 
+                                                used_memory, peak_memory)
+                stats_provider.save_info_command(self.id, current_time, 
+                                                 redis_info)
 
                 # databases=[]
                 # for key in sorted(redis_info.keys()):
@@ -265,7 +266,7 @@ class RedisMonitor(object):
             while self.active:
                 pass
         except (KeyboardInterrupt, SystemExit):
-            self.Stop()
+            self.stop()
             t.cancel()
 
     def stop(self):
