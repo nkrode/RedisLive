@@ -2,13 +2,14 @@ import contextlib
 import sqlite3
 import json
 
+
 class RedisStatsProvider(object):
     """A Sqlite based persistance to store and fetch stats
     """
 
     def __init__(self):
-         self.conn = sqlite3.connect('db/redislive.sqlite')
-         self.retries = 10
+        self.conn = sqlite3.connect('db/redislive.sqlite')
+        self.retries = 10
 
     def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
@@ -119,7 +120,7 @@ class RedisStatsProvider(object):
             query_time_fmt = '%Y-m-%d'
         elif group_by == "hour":
             query_time_fmt = '%Y-%m-%d %H'
-        elif group_by=="minute":
+        elif group_by == "minute":
             query_time_fmt = '%Y-%m-%d %H:%M'
         else:
             query_time_fmt = '%Y-%m-%d %H:%M:%S'

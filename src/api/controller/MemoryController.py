@@ -1,6 +1,4 @@
 from BaseController import BaseController
-import tornado.ioloop
-import tornado.web
 import dateutil.parser
 import datetime
 
@@ -15,19 +13,15 @@ class MemoryController(BaseController):
         return_data = dict(data=[],
                            timestamp=datetime.datetime.now().isoformat())
 
-        if from_date==None or to_date==None:
+        if from_date == None or to_date == None:
             end = datetime.datetime.now()
             delta = datetime.timedelta(seconds=60)
             start = end - delta
         else:
             start = dateutil.parser.parse(from_date)
-            end   = dateutil.parser.parse(to_date)
+            end = dateutil.parser.parse(to_date)
 
         combined_data = []
-        # TODO: These variables aren't currently used; should they be removed?
-        prev_max=0
-        prev_current=0
-        counter=0
 
         for data in self.stats_provider.get_memory_info(server, start, end):
             combined_data.append([data[0], data[1], data[2]])
@@ -37,4 +31,3 @@ class MemoryController(BaseController):
             return_data['data'].append(d)
 
         self.write(return_data)
-

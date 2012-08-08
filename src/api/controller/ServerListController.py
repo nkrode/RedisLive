@@ -1,6 +1,7 @@
 from BaseController import BaseController
 from api.util import settings
 
+
 class ServerListController(BaseController):
 
     def get(self):

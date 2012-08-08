@@ -1,7 +1,5 @@
 from decimal import Decimal
 from BaseController import BaseController
-import tornado.ioloop
-import tornado.web
 import re
 
 
@@ -11,23 +9,23 @@ class InfoController(BaseController):
         """
         server = self.get_argument("server")
         redis_info = self.stats_provider.get_info(server)
-        databases=[]
+        databases = []
 
         for key in sorted(redis_info.keys()):
             if key.startswith("db"):
                 database = redis_info[key]
-                database['name']=key
+                database['name'] = key
                 databases.append(database)
 
-        total_keys=0
+        total_keys = 0
         for database in databases:
-            total_keys+=database.get("keys")
+            total_keys += database.get("keys")
 
-        if(total_keys==0):
-            databases=[{"name" : "db0", "keys" : "0", "expires" : "0"}]
+        if total_keys == 0:
+            databases = [{"name": "db0", "keys": "0", "expires": "0"}]
 
         redis_info['databases'] = databases
-        redis_info['total_keys']= self.shorten_number(total_keys)
+        redis_info['total_keys'] = self.shorten_number(total_keys)
 
         uptime_seconds = redis_info['uptime_in_seconds']
         redis_info['uptime'] = self.shorten_time(uptime_seconds)
@@ -55,7 +53,7 @@ class InfoController(BaseController):
                 val = '1h'
             else:
                 val = num + "m"
-        elif (seconds < 60*60*24):
+        elif seconds < (60 * 60 * 24):
             # if the number is less than 1 day
             num = self.rounded_number(seconds, 60 * 60)
             if num == "24":
@@ -63,7 +61,7 @@ class InfoController(BaseController):
             else:
                 val = num + "h"
         else:
-            num = self.rounded_number(seconds, 60*60*24)
+            num = self.rounded_number(seconds, 60 * 60 * 24)
             val = num + "d"
 
         return val
@@ -82,11 +80,11 @@ class InfoController(BaseController):
             return val
         elif number >= 1000000 and number < 1000000000:
             num = self.rounded_number(number, 1000000)
-            val = "1B" if num=="1000" else  num + "M"
+            val = "1B" if num == "1000" else  num + "M"
             return val
         elif number >= 1000000000 and number < 1000000000000:
             num = self.rounded_number(number, 1000000000)
-            val = "1T" if num=="1000" else num + "B"
+            val = "1T" if num == "1000" else num + "B"
             return val
         else:
             num = self.rounded_number(number, 1000000000000)
@@ -99,7 +97,7 @@ class InfoController(BaseController):
             number (int|float): The number to round.
             denominator (int): The denominator.
         """
-        rounded = str(round(Decimal(number)/Decimal(denominator), 1))
+        rounded = str(round(Decimal(number) / Decimal(denominator), 1))
         replace_trailing_zero = re.compile('0$')
         no_trailing_zeros = replace_trailing_zero.sub('', rounded)
         replace_trailing_period = re.compile('\.$')
