@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import os
+
+import tornado.ioloop
+import tornado.options
+import tornado.web
+
+import RedisLive
+from RedisLive.api.controller.BaseStaticFileHandler import BaseStaticFileHandler
+
+from RedisLive.api.controller.ServerListController import ServerListController
+from RedisLive.api.controller.InfoController import InfoController
+from RedisLive.api.controller.MemoryController import MemoryController
+from RedisLive.api.controller.CommandsController import CommandsController
+from RedisLive.api.controller.TopCommandsController import TopCommandsController
+from RedisLive.api.controller.TopKeysController import TopKeysController
+
+# Bootup
+application = tornado.web.Application([
+  (r"/api/servers", ServerListController),
+  (r"/api/info", InfoController),
+  (r"/api/memory", MemoryController),
+  (r"/api/commands", CommandsController),
+  (r"/api/topcommands", TopCommandsController),
+  (r"/api/topkeys", TopKeysController),
+  (r"/(.*)", BaseStaticFileHandler, {"path": os.path.join(os.path.dirname(RedisLive.__file__), "www")})
+], debug="True")
+
+
+if __name__ == "__main__":
+	tornado.options.parse_command_line()
+	application.listen(8888)
+	tornado.ioloop.IOLoop.instance().start()

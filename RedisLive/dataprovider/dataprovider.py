@@ -1,6 +1,6 @@
-from api.util import settings
-import sqliteprovider
-import redisprovider
+from RedisLive.api.util import settings
+import RedisLive.dataprovider.sqliteprovider
+import RedisLive.dataprovider.redisprovider
 
 
 # TODO: Confirm there's not some implementation detail I've missed, then
@@ -17,6 +17,6 @@ class RedisLiveDataProvider(object):
 
         # FIXME: Should use a global variable for "redis" here.
         if data_store_type == "redis":
-            return redisprovider.RedisStatsProvider()
+            return RedisLive.dataprovider.redisprovider.RedisStatsProvider()
         else:
-            return sqliteprovider.RedisStatsProvider()
+            return RedisLive.dataprovider.sqliteprovider.RedisStatsProvider()
