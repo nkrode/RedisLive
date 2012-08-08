@@ -1,4 +1,4 @@
-from dataprovider.dataprovider import RedisLiveDataProvider
+from RedisLive.dataprovider.dataprovider import RedisLiveDataProvider
 import tornado.ioloop
 import tornado.web
 import dateutil.parser

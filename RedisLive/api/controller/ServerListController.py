@@ -1,5 +1,5 @@
-from BaseController import BaseController
-from api.util import settings
+from RedisLive.api.controller.BaseController import BaseController
+from RedisLive.api.util import settings
 
 class ServerListController(BaseController):
 
