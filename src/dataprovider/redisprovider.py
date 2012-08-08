@@ -60,7 +60,7 @@ class RedisStatsProvider(object):
         # store top command and key counts in sorted set for every second
         # top N are easily available from sorted set in redis
         # also keep a sorted set for every day
-        # switch to daily stats when stats requsted are for a longer time period        
+        # switch to daily stats when stats requsted are for a longer time period
 
         command_count_key = server + ":CommandCount:" + epoch
         pipeline.zincrby(command_count_key, command, 1)
@@ -124,7 +124,6 @@ class RedisStatsProvider(object):
             # eval feels like it could be wrong/dangerous... but that's just a
             # feeling.
             row = ast.literal_eval(row)
-            parts = []
 
             # convert the timestamp
             timestamp = datetime.fromtimestamp(int(row['timestamp']))
@@ -159,7 +158,7 @@ class RedisStatsProvider(object):
             key_name = server + ":CommandCountByHour"
 
             t = from_date
-            while t<= to_date:
+            while t <= to_date:
                 field_name = t.strftime('%y%m%d') + ":" + str(t.hour)
                 s.append(field_name)
                 time_stamps.append(t.strftime('%s'))
@@ -186,7 +185,7 @@ class RedisStatsProvider(object):
 
         data = []
         counts = self.conn.hmget(key_name, s)
-        for x in xrange(0,len(counts)):
+        for x in xrange(0, len(counts)):
             # the default time format string
             time_fmt = '%Y-%m-%d %H:%M:%S'
 
@@ -199,11 +198,11 @@ class RedisStatsProvider(object):
 
             # get the count.
             try:
-                if counts[x] is not None: 
+                if counts[x] is not None:
                     count = int(counts[x])
                 else:
                     count = 0
-            except Exception as e:
+            except Exception:
                 count = 0
 
             # convert the timestamp
@@ -239,7 +238,6 @@ class RedisStatsProvider(object):
         return self.get_top_counts(server, from_date, to_date, "KeyCount",
                                    "DailyKeyCount")
 
-
     # Helper methods
     def get_top_counts(self, server, from_date, to_date, seconds_key_name,
                        day_key_name, result_count=None):
@@ -270,7 +268,7 @@ class RedisStatsProvider(object):
         # store the set names to use in ZUNIONSTORE in a list
         s = []
 
-        if diff.days > 2 :
+        if diff.days > 2:
             # when difference is over 2 days, no need to check counts for every second
             # Calculate:
             # counts of every second on the start day

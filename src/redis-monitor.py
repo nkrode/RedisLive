@@ -58,6 +58,7 @@ class Monitor(object):
         while True:
             yield self.parse_response()
 
+
 class MonitorThread(threading.Thread):
     """Runs a thread to execute the MONITOR command against a given Redis server
     and store the resulting aggregated statistics in the configured stats
@@ -132,13 +133,13 @@ class MonitorThread(threading.Thread):
                     arguments = None
 
                 if not command == 'INFO' and not command == 'MONITOR':
-                    stats_provider.save_monitor_command(self.id, 
-                                                        timestamp, 
-                                                        command, 
-                                                        str(keyname), 
+                    stats_provider.save_monitor_command(self.id,
+                                                        timestamp,
+                                                        command,
+                                                        str(keyname),
                                                         str(arguments))
 
-            except Exception, e:
+            except Exception:
                 tb = traceback.format_exc()
                 print "==============================\n"
                 print datetime.datetime.now()
@@ -148,6 +149,7 @@ class MonitorThread(threading.Thread):
 
             if self.stopped():
                 break
+
 
 class InfoThread(threading.Thread):
     """Runs a thread to execute the INFO command against a given Redis server
@@ -202,9 +204,9 @@ class InfoThread(threading.Thread):
                 except:
                     peak_memory = used_memory
 
-                stats_provider.save_memory_info(self.id, current_time, 
+                stats_provider.save_memory_info(self.id, current_time,
                                                 used_memory, peak_memory)
-                stats_provider.save_info_command(self.id, current_time, 
+                stats_provider.save_info_command(self.id, current_time,
                                                  redis_info)
 
                 # databases=[]
@@ -224,12 +226,13 @@ class InfoThread(threading.Thread):
 
                 time.sleep(1)
 
-            except Exception, e:
+            except Exception:
                 tb = traceback.format_exc()
                 print "==============================\n"
                 print datetime.datetime.now()
                 print tb
                 print "==============================\n"
+
 
 class RedisMonitor(object):
 
@@ -272,7 +275,7 @@ class RedisMonitor(object):
     def stop(self):
         """Stops the monitor and all associated threads.
         """
-        if args.quiet==False:
+        if args.quiet == False:
             print "shutting down..."
         for t in self.threads:
                 t.stop()
