@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+import os
+
 import tornado.ioloop
 import tornado.options
 import tornado.web
@@ -27,6 +29,7 @@ application = tornado.web.Application([
 
 
 if __name__ == "__main__":
-	tornado.options.parse_command_line()
-	application.listen(8888)
-	tornado.ioloop.IOLoop.instance().start()
+    PORT = os.environ.get('PORT', 8888)
+    tornado.options.parse_command_line()
+    application.listen(PORT)
+    tornado.ioloop.IOLoop.instance().start()
