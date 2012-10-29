@@ -13,7 +13,7 @@ class RedisLiveDataProvider(object):
 
         Valid providers are currently Redis and SQLite.
         """
-        data_store_type = settings.get_data_store_type()
+        data_store_type = settings.DATASTORE_TYPE
 
         # FIXME: Should use a global variable for "redis" here.
         if data_store_type == "redis":

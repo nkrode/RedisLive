@@ -1,0 +1,7 @@
+RedisServers:
+  - host: localhost
+    port: 6379
+DataStoreType: redis
+RedisStatsServer:
+  host: localhost
+  port: 6381

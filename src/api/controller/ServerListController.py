@@ -12,11 +12,11 @@ class ServerListController(BaseController):
         """
         # TODO: Move this into the settings module so everything benefits.
         server_list = []
-        redis_servers = settings.get_redis_servers()
+        redis_servers = settings.REDIS_SERVERS
 
         for server in redis_servers:
-            server_id = "%(server)s:%(port)s" % server
-            s = dict(server=server['server'], port=server['port'], id=server_id)
+            server_id = "%(host)s:%(port)s" % server
+            s = dict(server=server['host'], port=server['port'], id=server_id)
             server_list.append(s)
 
         return server_list

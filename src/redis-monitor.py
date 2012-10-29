@@ -132,10 +132,10 @@ class MonitorThread(threading.Thread):
                     arguments = None
 
                 if not command == 'INFO' and not command == 'MONITOR':
-                    stats_provider.save_monitor_command(self.id, 
-                                                        timestamp, 
-                                                        command, 
-                                                        str(keyname), 
+                    stats_provider.save_monitor_command(self.id,
+                                                        timestamp,
+                                                        command,
+                                                        str(keyname),
                                                         str(arguments))
 
             except Exception, e:
@@ -202,9 +202,9 @@ class InfoThread(threading.Thread):
                 except:
                     peak_memory = used_memory
 
-                stats_provider.save_memory_info(self.id, current_time, 
+                stats_provider.save_memory_info(self.id, current_time,
                                                 used_memory, peak_memory)
-                stats_provider.save_info_command(self.id, current_time, 
+                stats_provider.save_info_command(self.id, current_time,
                                                  redis_info)
 
                 # databases=[]
@@ -244,16 +244,16 @@ class RedisMonitor(object):
         Args:
             duration (int): The number of seconds to monitor for.
         """
-        redis_servers = settings.get_redis_servers()
+        redis_servers = settings.REDIS_SERVERS
 
         for redis_server in redis_servers:
-            monitor = MonitorThread(redis_server["server"], redis_server["port"],
+            monitor = MonitorThread(redis_server["host"], redis_server["port"],
                                    redis_server.get("password", None))
             self.threads.append(monitor)
             monitor.setDaemon(True)
             monitor.start()
 
-            info = InfoThread(redis_server["server"], redis_server["port"],
+            info = InfoThread(redis_server["host"], redis_server["port"],
                               redis_server.get("password", None))
             self.threads.append(info)
             info.setDaemon(True)

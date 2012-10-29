@@ -10,8 +10,8 @@ class RedisStatsProvider(object):
 
     def __init__(self):
         # redis server to use to store stats
-        stats_server = settings.get_redis_stats_server()
-        self.server = stats_server["server"]
+        stats_server = settings.REDIS_STATS_SERVER
+        self.server = stats_server["host"]
         self.port = stats_server["port"]
         self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)
 
@@ -60,7 +60,7 @@ class RedisStatsProvider(object):
         # store top command and key counts in sorted set for every second
         # top N are easily available from sorted set in redis
         # also keep a sorted set for every day
-        # switch to daily stats when stats requsted are for a longer time period        
+        # switch to daily stats when stats requsted are for a longer time period
 
         command_count_key = server + ":CommandCount:" + epoch
         pipeline.zincrby(command_count_key, command, 1)
@@ -199,7 +199,7 @@ class RedisStatsProvider(object):
 
             # get the count.
             try:
-                if counts[x] is not None: 
+                if counts[x] is not None:
                     count = int(counts[x])
                 else:
                     count = 0
