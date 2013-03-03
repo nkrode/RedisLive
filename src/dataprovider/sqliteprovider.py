@@ -1,14 +1,17 @@
 import contextlib
+import os
 import sqlite3
 import json
+
 
 class RedisStatsProvider(object):
     """A Sqlite based persistance to store and fetch stats
     """
 
     def __init__(self):
-         self.conn = sqlite3.connect('db/redislive.sqlite')
-         self.retries = 10
+        SQLITE_PATH = os.environ.get('SQLITE_PATH', 'db/redislive.sqlite')
+        self.conn = sqlite3.connect(SQLITE_PATH)
+        self.retries = 10
 
     def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
