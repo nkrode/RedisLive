@@ -12,7 +12,7 @@ class RedisStatsProvider(object):
         # redis server to use to store stats
         stats_server = settings.get_redis_stats_server()
         self.server = stats_server["server"]
-        self.port = stats_server["port"]
+        self.port = stats_server.get("port", 6379)
         self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)
 
     def save_memory_info(self, server, timestamp, used, peak):
