@@ -132,10 +132,10 @@ class MonitorThread(threading.Thread):
                     arguments = None
 
                 if not command == 'INFO' and not command == 'MONITOR':
-                    stats_provider.save_monitor_command(self.id, 
-                                                        timestamp, 
-                                                        command, 
-                                                        str(keyname), 
+                    stats_provider.save_monitor_command(self.id,
+                                                        timestamp,
+                                                        command,
+                                                        str(keyname),
                                                         str(arguments))
 
             except Exception, e:
@@ -202,9 +202,9 @@ class InfoThread(threading.Thread):
                 except:
                     peak_memory = used_memory
 
-                stats_provider.save_memory_info(self.id, current_time, 
+                stats_provider.save_memory_info(self.id, current_time,
                                                 used_memory, peak_memory)
-                stats_provider.save_info_command(self.id, current_time, 
+                stats_provider.save_info_command(self.id, current_time,
                                                  redis_info)
 
                 # databases=[]

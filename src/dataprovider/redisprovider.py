@@ -60,7 +60,7 @@ class RedisStatsProvider(object):
         # store top command and key counts in sorted set for every second
         # top N are easily available from sorted set in redis
         # also keep a sorted set for every day
-        # switch to daily stats when stats requsted are for a longer time period        
+        # switch to daily stats when stats requsted are for a longer time period
 
         command_count_key = server + ":CommandCount:" + epoch
         pipeline.zincrby(command_count_key, command, 1)
@@ -199,7 +199,7 @@ class RedisStatsProvider(object):
 
             # get the count.
             try:
-                if counts[x] is not None: 
+                if counts[x] is not None:
                     count = int(counts[x])
                 else:
                     count = 0
