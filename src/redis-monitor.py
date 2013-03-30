@@ -64,7 +64,7 @@ class MonitorThread(threading.Thread):
     provider.
     """
 
-    def __init__(self, server, port, password=None):
+    def __init__(self, server, port, db=0, password=None):
         """Initializes a MontitorThread.
 
         Args:
@@ -77,6 +77,7 @@ class MonitorThread(threading.Thread):
         super(MonitorThread, self).__init__()
         self.server = server
         self.port = port
+        self.db = db
         self.password = password
         self.id = self.server + ":" + str(self.port)
         self._stop = threading.Event()
@@ -95,7 +96,7 @@ class MonitorThread(threading.Thread):
         """Runs the thread.
         """
         stats_provider = RedisLiveDataProvider.get_provider()
-        pool = redis.ConnectionPool(host=self.server, port=self.port, db=0,
+        pool = redis.ConnectionPool(host=self.server, port=self.port, db=self.db,
                                     password=self.password)
         monitor = Monitor(pool)
         commands = monitor.monitor()
@@ -154,7 +155,7 @@ class InfoThread(threading.Thread):
     and store the resulting statistics in the configured stats provider.
     """
 
-    def __init__(self, server, port, password=None):
+    def __init__(self, server, port, db=0, password=None):
         """Initializes an InfoThread instance.
 
         Args:
@@ -168,6 +169,7 @@ class InfoThread(threading.Thread):
         threading.Thread.__init__(self)
         self.server = server
         self.port = port
+        self.db = db
         self.password = password
         self.id = self.server + ":" + str(self.port)
         self._stop = threading.Event()
@@ -186,7 +188,7 @@ class InfoThread(threading.Thread):
         """Does all the work.
         """
         stats_provider = RedisLiveDataProvider.get_provider()
-        redis_client = redis.StrictRedis(host=self.server, port=self.port, db=0,
+        redis_client = redis.StrictRedis(host=self.server, port=self.port, db=self.db,
                                         password=self.password)
 
         # process the results from redis
@@ -248,12 +250,14 @@ class RedisMonitor(object):
 
         for redis_server in redis_servers:
             monitor = MonitorThread(redis_server["server"], redis_server.get("port", 6379),
+                                   redis_server.get("db", 0),
                                    redis_server.get("password", None))
             self.threads.append(monitor)
             monitor.setDaemon(True)
             monitor.start()
 
             info = InfoThread(redis_server["server"], redis_server.get("port", 6379),
+                              redis_server.get("db", 0),
                               redis_server.get("password", None))
             self.threads.append(info)
             info.setDaemon(True)
