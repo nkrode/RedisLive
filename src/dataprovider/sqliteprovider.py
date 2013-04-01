@@ -7,8 +7,8 @@ class RedisStatsProvider(object):
     """
 
     def __init__(self):
-         self.conn = sqlite3.connect('db/redislive.sqlite')
-         self.retries = 10
+        self.conn = sqlite3.connect('db/redislive.sqlite')
+        self.retries = 10
 
     def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
