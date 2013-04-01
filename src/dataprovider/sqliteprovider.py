@@ -1,3 +1,4 @@
+from api.util import settings
 import contextlib
 import sqlite3
 import json
@@ -7,7 +8,9 @@ class RedisStatsProvider(object):
     """
 
     def __init__(self):
-        self.conn = sqlite3.connect('db/redislive.sqlite')
+        stats = settings.get_sqlite_stats_store()
+        self.location = stats.get('path', 'db/redislive.sqlite')
+        self.conn = sqlite3.connect(self.location)
         self.retries = 10
 
     def save_memory_info(self, server, timestamp, used, peak):
