@@ -12,8 +12,9 @@ class RedisStatsProvider(object):
         # redis server to use to store stats
         stats_server = settings.get_redis_stats_server()
         self.server = stats_server["server"]
-        self.port = stats_server["port"]
-        self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)
+        self.port = stats_server.get("port", 6379)
+        self.db = stats_server.get("db", 0)
+        self.conn = redis.StrictRedis(host=self.server, port=self.port, db=self.db)
 
     def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
@@ -60,7 +61,7 @@ class RedisStatsProvider(object):
         # store top command and key counts in sorted set for every second
         # top N are easily available from sorted set in redis
         # also keep a sorted set for every day
-        # switch to daily stats when stats requsted are for a longer time period        
+        # switch to daily stats when stats requsted are for a longer time period
 
         command_count_key = server + ":CommandCount:" + epoch
         pipeline.zincrby(command_count_key, command, 1)
@@ -199,7 +200,7 @@ class RedisStatsProvider(object):
 
             # get the count.
             try:
-                if counts[x] is not None: 
+                if counts[x] is not None:
                     count = int(counts[x])
                 else:
                     count = 0
