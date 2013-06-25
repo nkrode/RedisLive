@@ -13,7 +13,11 @@ class RedisStatsProvider(object):
         stats_server = settings.get_redis_stats_server()
         self.server = stats_server["server"]
         self.port = stats_server["port"]
-        self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0)
+        if stats_server["password"]:
+            self.password = stats_server["password"]
+        else:
+            self.password = None
+        self.conn = redis.StrictRedis(host=self.server, port=self.port, db=0, password=self.password)
 
     def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
