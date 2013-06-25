@@ -246,15 +246,20 @@ class RedisMonitor(object):
         """
         redis_servers = settings.get_redis_servers()
 
+
         for redis_server in redis_servers:
-            monitor = MonitorThread(redis_server["server"], redis_server["port"],
-                                   redis_server.get("password", None))
+
+            if redis_server["password"]:
+                redis_password = redis_server["password"]
+            else:
+                redis_password = None
+
+            monitor = MonitorThread(redis_server["server"], redis_server["port"], redis_password)
             self.threads.append(monitor)
             monitor.setDaemon(True)
             monitor.start()
 
-            info = InfoThread(redis_server["server"], redis_server["port"],
-                              redis_server.get("password", None))
+            info = InfoThread(redis_server["server"], redis_server["port"], redis_password)
             self.threads.append(info)
             info.setDaemon(True)
             info.start()
@@ -281,15 +286,15 @@ class RedisMonitor(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Monitor redis.')
-    parser.add_argument('--duration',
-                        type=int,
-                        help="duration to run the monitor command (in seconds)",
-                        required=True)
+    #parser.add_argument('--duration',
+    #                    type=int,
+    #                    help="duration to run the monitor command (in seconds)",
+    #                    required=True)
     parser.add_argument('--quiet',
                         help="do  not write anything to standard output",
                         required=False,
                         action='store_true')
     args = parser.parse_args()
-    duration = args.duration
+    duration = 10 #args.duration
     monitor = RedisMonitor()
     monitor.run(duration)
