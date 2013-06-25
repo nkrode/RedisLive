@@ -286,15 +286,15 @@ class RedisMonitor(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Monitor redis.')
-    #parser.add_argument('--duration',
-    #                    type=int,
-    #                    help="duration to run the monitor command (in seconds)",
-    #                    required=True)
+    parser.add_argument('--duration',
+                        type=int,
+                        help="duration to run the monitor command (in seconds)",
+                        required=True)
     parser.add_argument('--quiet',
                         help="do  not write anything to standard output",
                         required=False,
                         action='store_true')
     args = parser.parse_args()
-    duration = 10 #args.duration
+    duration = args.duration
     monitor = RedisMonitor()
     monitor.run(duration)
