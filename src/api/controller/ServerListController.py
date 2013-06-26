@@ -16,7 +16,7 @@ class ServerListController(BaseController):
 
         for server in redis_servers:
             server_id = "%(server)s:%(port)s" % server
-            s = dict(server=server['server'], port=server['port'], id=server_id)
+            s = dict(server=server['server'], port=server['port'], password=server['password'], id=server_id)
             server_list.append(s)
 
         return server_list
