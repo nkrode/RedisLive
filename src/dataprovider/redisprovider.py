@@ -76,7 +76,7 @@ class RedisStatsProvider(object):
         pipeline.zincrby(key_count_key, keyname, 1)
 
         key_count_key = server + ":DailyKeyCount:" + current_date
-        pipeline.zincrby(key_count_key, command, 1)
+        pipeline.zincrby(key_count_key, keyname, 1)
 
         # keep aggregate command in a hash
         command_count_key = server + ":CommandCountBySecond"
