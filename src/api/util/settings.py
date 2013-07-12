@@ -1,3 +1,4 @@
+from __future__ import with_statement
 import json
 
 
@@ -5,7 +6,8 @@ def get_settings():
     """Parses the settings from redis-live.conf.
     """
     # TODO: Consider YAML. Human writable, machine readable.
-    return json.load(open("redis-live.conf"))
+    with open("redis-live.conf") as config:
+        return json.load(config)
 
 
 def get_redis_servers():
