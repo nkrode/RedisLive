@@ -249,10 +249,7 @@ class RedisMonitor(object):
 
         for redis_server in redis_servers:
 
-            if redis_server["password"]:
-                redis_password = redis_server["password"]
-            else:
-                redis_password = None
+            redis_password = redis_server.get("password")
 
             monitor = MonitorThread(redis_server["server"], redis_server["port"], redis_password)
             self.threads.append(monitor)
