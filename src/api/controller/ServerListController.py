@@ -15,6 +15,9 @@ class ServerListController(BaseController):
         redis_servers = settings.get_redis_servers()
 
         for server in redis_servers:
+            if 'password' not in server:
+              server['password'] = None
+
             server_id = "%(server)s:%(port)s" % server
             s = dict(server=server['server'], port=server['port'], password=server['password'], id=server_id)
             server_list.append(s)
