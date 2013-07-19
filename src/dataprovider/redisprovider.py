@@ -1,9 +1,8 @@
-from api.util import settings
+from api.util import settings, timeutils
 from datetime import datetime, timedelta
 import redis
 import json
 import ast
-
 
 class RedisStatsProvider(object):
     """A Redis based persistance to store and fetch stats"""
@@ -25,10 +24,10 @@ class RedisStatsProvider(object):
             used (int): Used memory value.
             peak (int): Peak memory value.
         """
-        data = {"timestamp": timestamp.strftime('%s'),
+        data = {"timestamp": str(timeutils.convert_to_epoch(timestamp)),
                 "used": used,
                 "peak": peak}
-        self.conn.zadd(server + ":memory", timestamp.strftime('%s'), data)
+        self.conn.zadd(server + ":memory", str(timeutils.convert_to_epoch(timestamp)), data)
 
     def save_info_command(self, server, timestamp, info):
         """Save Redis info command dump
@@ -52,7 +51,7 @@ class RedisStatsProvider(object):
             argument (str): The args sent to the command.
         """
 
-        epoch = timestamp.strftime('%s')
+        epoch = str(timeutils.convert_to_epoch(timestamp))
         current_date = timestamp.strftime('%y%m%d')
 
         # start a redis MULTI/EXEC transaction
@@ -116,8 +115,8 @@ class RedisStatsProvider(object):
             to_date (datetime): Get memory info up to this date.
         """
         memory_data = []
-        start = int(from_date.strftime("%s"))
-        end = int(to_date.strftime("%s"))
+        start = timeutils.convert_to_epoch(from_date)
+        end = timeutils.convert_to_epoch(to_date)
         rows = self.conn.zrangebyscore(server + ":memory", start, end)
 
         for row in rows:
@@ -153,7 +152,7 @@ class RedisStatsProvider(object):
             t = from_date.date()
             while t <= to_date.date():
                 s.append(t.strftime('%y%m%d'))
-                time_stamps.append(t.strftime('%s'))
+                time_stamps.append(str(timeutils.convert_to_epoch(t)))
                 t = t + timedelta(days=1)
 
         elif group_by == "hour":
@@ -163,7 +162,7 @@ class RedisStatsProvider(object):
             while t<= to_date:
                 field_name = t.strftime('%y%m%d') + ":" + str(t.hour)
                 s.append(field_name)
-                time_stamps.append(t.strftime('%s'))
+                time_stamps.append(str(timeutils.convert_to_epoch(t)))
                 t = t + timedelta(seconds=3600)
 
         elif group_by == "minute":
@@ -174,13 +173,13 @@ class RedisStatsProvider(object):
                 field_name = t.strftime('%y%m%d') + ":" + str(t.hour)
                 field_name += ":" + str(t.minute)
                 s.append(field_name)
-                time_stamps.append(t.strftime('%s'))
+                time_stamps.append(str(timeutils.convert_to_epoch(t)))
                 t = t + timedelta(seconds=60)
 
         else:
             key_name = server + ":CommandCountBySecond"
-            start = int(from_date.strftime("%s"))
-            end = int(to_date.strftime("%s"))
+            start = timeutils.convert_to_epoch(from_date)
+            end = timeutils.convert_to_epoch(to_date)
             for x in range(start, end + 1):
                 s.append(str(x))
                 time_stamps.append(x)
@@ -261,8 +260,8 @@ class RedisStatsProvider(object):
             result_count = 10
 
         # get epoch
-        start = int(from_date.strftime("%s"))
-        end = int(to_date.strftime("%s"))
+        start = timeutils.convert_to_epoch(from_date)
+        end = timeutils.convert_to_epoch(to_date)
         diff = to_date - from_date
 
         # start a redis MULTI/EXEC transaction
@@ -279,8 +278,8 @@ class RedisStatsProvider(object):
             # counts of every second on the end day
             next_day = from_date.date() + timedelta(days=1)
             prev_day = to_date.date() - timedelta(days=1)
-            from_date_end_epoch = int(next_day.strftime("%s")) - 1
-            to_date_begin_epoch = int(to_date.date().strftime("%s"))
+            from_date_end_epoch = timeutils.convert_to_epoch(next_day) - 1
+            to_date_begin_epoch = timeutils.convert_to_epoch(to_date.date())
 
             # add counts of every second on the start day
             for x in range(start, from_date_end_epoch + 1):
