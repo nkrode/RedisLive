@@ -261,15 +261,17 @@ class RedisMonitor(object):
             info.setDaemon(True)
             info.start()
 
-        t = Timer(duration, self.stop)
-        t.start()
+        if duration >= 0:
+            t = Timer(duration, self.stop)
+            t.start()
 
         try:
             while self.active:
                 pass
         except (KeyboardInterrupt, SystemExit):
             self.stop()
-            t.cancel()
+            if duration >= 0:
+                t.cancel()
 
     def stop(self):
         """Stops the monitor and all associated threads.
@@ -286,7 +288,8 @@ if __name__ == '__main__':
     parser.add_argument('--duration',
                         type=int,
                         help="duration to run the monitor command (in seconds)",
-                        required=True)
+                        required=False,
+						default=-1)
     parser.add_argument('--quiet',
                         help="do  not write anything to standard output",
                         required=False,
