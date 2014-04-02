@@ -15,7 +15,7 @@ class TopCommandsController(BaseController):
         from_date = self.get_argument("from", None)
         to_date = self.get_argument("to", None)
 
-        if from_date==None or to_date==None:
+        if from_date == None or from_date == '' or to_date == None or to_date == '':
             end = datetime.datetime.now()
             delta = datetime.timedelta(seconds=120)
             start = end - delta
