@@ -13,6 +13,26 @@ class RedisStatsProvider(object):
         self.conn = sqlite3.connect(self.location)
         self.retries = 10
 
+    def delete_old_date(self, timestamp):
+        """Delete old date,
+
+        Args:
+            server (str): The server ID
+            timestamp (datetime): The time of delete date.
+        """
+
+	query = "delete from monitor where datetime < ?;"
+        values = (timestamp.strftime('%Y-%m-%d %H:%M:%S'),)
+        self._retry_query(query, values)
+	
+	query = "delete from memory where datetime < ?;"
+        values = (timestamp.strftime('%Y-%m-%d %H:%M:%S'),)
+        self._retry_query(query, values)
+	
+	query = "delete from info where datetime < ?;"
+        values = (timestamp.strftime('%Y-%m-%d %H:%M:%S'),)
+        self._retry_query(query, values)
+
     def save_memory_info(self, server, timestamp, used, peak):
         """Saves used and peak memory stats,
 

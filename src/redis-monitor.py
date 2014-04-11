@@ -231,6 +231,53 @@ class InfoThread(threading.Thread):
                 print tb
                 print "==============================\n"
 
+class DeleteDataThread(threading.Thread):
+    """Runs a thread to delete old date.
+    """
+
+    def __init__(self, days=1):
+        """Initializes an DeleteDataThread instance.
+
+        Args:
+            
+        Kwargs:
+            days (int): The days of deadline. \
+                    Default: 1
+        """
+        threading.Thread.__init__(self)
+        self.days = days
+        self._stop = threading.Event()
+
+    def stop(self):
+        """Stops the thread.
+        """
+        self._stop.set()
+
+    def stopped(self):
+        """Returns True if the thread is stopped, False otherwise.
+        """
+        return self._stop.is_set()
+
+    def run(self):
+        """Does all the work.
+        """
+
+        stats_provider = RedisLiveDataProvider.get_provider()
+ 
+        while not self.stopped():
+            try:
+                current_time = datetime.datetime.now()
+		deadline_time = current_time - datetime.timedelta(days = self.days)
+		stats_provider.delete_old_date(deadline_time)
+		time.sleep(10)
+
+            except Exception, e:
+                tb = traceback.format_exc()
+                print "==============================\n"
+                print datetime.datetime.now()
+                print tb
+                print "==============================\n"
+
 class RedisMonitor(object):
 
     def __init__(self):
@@ -260,6 +307,11 @@ class RedisMonitor(object):
             self.threads.append(info)
             info.setDaemon(True)
             info.start()
+
+        delete_data = DeleteDataThread()
+        self.threads.append(delete_data)
+        delete_data.setDaemon(True)
+        delete_data.start()
 
         if duration >= 0:
             t = Timer(duration, self.stop)
