@@ -37,9 +37,10 @@ var BaseWidget = Backbone.View.extend({
     this.startTime = new Date()
 
     this.model.fetch({
-        data : { 
-          from : this.$el.find('[name=from]').val()
-        , to : this.$el.find('[name=to]').val()
+        data : {
+          // if no from/to are found, provide reasonable defaults of a week ago and now, respectively
+          from : this.$el.find('[name=from]').val() || new Date(new Date() - 7*24*60*60000)
+        , to : this.$el.find('[name=to]').val() || new Date()
         , server : this.server
       }
     })
