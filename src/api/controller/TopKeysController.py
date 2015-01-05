@@ -14,7 +14,7 @@ class TopKeysController(BaseController):
       from_date = self.get_argument("from", None)
       to_date = self.get_argument("to", None)
 
-      if from_date==None or to_date==None:
+      if not from_date or not to_date:
           end = datetime.datetime.now()
           delta = datetime.timedelta(seconds=120)
           start = end - delta

@@ -15,7 +15,7 @@ class MemoryController(BaseController):
         return_data = dict(data=[],
                            timestamp=datetime.datetime.now().isoformat())
 
-        if from_date==None or to_date==None:
+        if not from_date or not to_date:
             end = datetime.datetime.now()
             delta = datetime.timedelta(seconds=60)
             start = end - delta
