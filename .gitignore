@@ -29,3 +29,5 @@ pip-log.txt
 .DS_Store
 
 *.sublime-workspace
+*.sublime-project
+src/redis-live.conf
