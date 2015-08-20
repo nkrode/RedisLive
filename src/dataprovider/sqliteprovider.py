@@ -119,7 +119,7 @@ class RedisStatsProvider(object):
                   server)
 
         if group_by == "day":
-            query_time_fmt = '%Y-m-%d'
+            query_time_fmt = '%Y-%m-%d'
         elif group_by == "hour":
             query_time_fmt = '%Y-%m-%d %H'
         elif group_by=="minute":
