@@ -31,3 +31,8 @@ pip-log.txt
 *.sublime-workspace
 *.sublime-project
 src/redis-live.conf
+
+
+# Vim
+*.sw[po]
+venv
