@@ -1,5 +1,6 @@
 RedisLive
 ---------
+original project and loading address: https://github.com/nkrode/RedisLive
 
 Visualize your redis instances, analyze query patterns and spikes.
 
