@@ -266,7 +266,7 @@ class RedisMonitor(object):
 
         try:
             while self.active:
-                pass
+                time.sleep(1)
         except (KeyboardInterrupt, SystemExit):
             self.stop()
             t.cancel()
